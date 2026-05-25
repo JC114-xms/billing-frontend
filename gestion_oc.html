@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión OC · BillingAnalytics</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10; --surface: #111318; --surface2: #181c23;
+    --border: #232830; --border2: #2e3440;
+    --accent: #3b82f6; --accent2: #1d4ed8;
+    --success: #10b981; --warn: #f59e0b; --danger: #ef4444;
+    --text: #e8eaf0; --muted: #6b7280;
+    --mono: 'DM Mono', monospace; --sans: 'Syne', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px; opacity: 0.35; pointer-events: none;
+  }
+  .topbar {
+    display: flex; align-items: center; gap: 16px;
+    padding: 20px 32px; border-bottom: 1px solid var(--border);
+    background: var(--surface); position: relative;
+  }
+  .logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 8px; margin-left: auto; }
+  .nav-link {
+    padding: 8px 16px; border-radius: 8px; font-size: 13px;
+    font-family: var(--mono); color: var(--muted); text-decoration: none;
+    border: 1px solid transparent; transition: all 0.15s;
+  }
+  .nav-link:hover { color: var(--text); border-color: var(--border2); }
+  .nav-link.active { color: var(--accent); border-color: var(--accent); background: rgba(59,130,246,0.08); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  .page-title { font-size: 28px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 4px; }
+  .page-sub { font-size: 13px; color: var(--muted); font-family: var(--mono); margin-bottom: 28px; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .select-periodo {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 10px 14px; color: var(--text);
+    font-family: var(--mono); font-size: 13px; outline: none;
+    cursor: pointer;
+  }
+  .filter-btn {
+    padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border2);
+    background: var(--surface); color: var(--muted); font-family: var(--mono);
+    font-size: 12px; cursor: pointer; transition: all 0.15s; letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.08); }
+  .filter-btn.f-pendiente.active { border-color: var(--warn); color: var(--warn); background: rgba(245,158,11,0.08); }
+  .filter-btn.f-recibida.active { border-color: var(--success); color: var(--success); background: rgba(16,185,129,0.08); }
+  .filter-btn.f-vencida.active { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.08); }
+
+  /* KPIs */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  .kpi {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 24px; position: relative; overflow: hidden;
+  }
+  .kpi::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .kpi.k-total::before { background: var(--accent); }
+  .kpi.k-pendiente::before { background: var(--warn); }
+  .kpi.k-recibida::before { background: var(--success); }
+  .kpi.k-vencida::before { background: var(--danger); }
+  .kpi-label { font-size: 11px; font-family: var(--mono); color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .kpi-value { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+  .kpi-sub { font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 4px; }
+
+  /* Tabla */
+  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; }
+  thead tr { border-bottom: 1px solid var(--border2); }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-family: var(--mono); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  td { padding: 14px 16px; font-size: 13px; }
+  .td-cliente { font-weight: 600; font-size: 13px; max-width: 200px; }
+  .td-mono { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .td-amount { font-family: var(--mono); font-size: 13px; font-weight: 500; }
+
+  /* Badges */
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 20px;
+    font-size: 11px; font-family: var(--mono); letter-spacing: 0.5px;
+    text-transform: uppercase; font-weight: 500;
+  }
+  .badge-pendiente { background: rgba(245,158,11,0.12); color: var(--warn); border: 1px solid rgba(245,158,11,0.25); }
+  .badge-recibida { background: rgba(16,185,129,0.12); color: var(--success); border: 1px solid rgba(16,185,129,0.25); }
+  .badge-vencida { background: rgba(239,68,68,0.12); color: var(--danger); border: 1px solid rgba(239,68,68,0.25); }
+  .badge-cobro { background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); }
+
+  /* Días restantes */
+  .dias-ok { color: var(--success); font-family: var(--mono); font-size: 12px; }
+  .dias-warn { color: var(--warn); font-family: var(--mono); font-size: 12px; }
+  .dias-danger { color: var(--danger); font-family: var(--mono); font-size: 12px; font-weight: 600; }
+
+  /* Botones acción */
+  .btn-accion {
+    padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border2);
+    background: var(--surface2); color: var(--muted); font-family: var(--mono);
+    font-size: 11px; cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+  .btn-accion:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-cobro:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-oc:hover { border-color: var(--success); color: var(--success); }
+
+  /* Modal */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7); z-index: 100;
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 32px; width: 100%; max-width: 480px;
+    position: relative;
+  }
+  .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .modal-sub { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-label { display: block; font-size: 11px; font-family: var(--mono); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+  .form-input {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 10px 12px; color: var(--text);
+    font-family: var(--mono); font-size: 13px; outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--accent); }
+  .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
+  .btn-primary {
+    flex: 1; padding: 12px; background: var(--accent); color: #fff;
+    border: none; border-radius: 8px; font-family: var(--sans);
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-secondary {
+    padding: 12px 20px; background: transparent; color: var(--muted);
+    border: 1px solid var(--border2); border-radius: 8px; font-family: var(--sans);
+    font-size: 14px; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-secondary:hover { color: var(--text); border-color: var(--text); }
+  .btn-success {
+    flex: 1; padding: 12px; background: var(--success); color: #fff;
+    border: none; border-radius: 8px; font-family: var(--sans);
+    font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+  }
+  .btn-success:hover { opacity: 0.88; }
+
+  .loading { text-align: center; padding: 60px; color: var(--muted); font-family: var(--mono); font-size: 13px; }
+  .empty { text-align: center; padding: 60px; color: var(--muted); font-family: var(--mono); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">Billing<span>Analytics</span></div>
+  <nav class="nav-links">
+    <a href="index.html" class="nav-link">Cargar Excel</a>
+    <a href="gestion_oc.html" class="nav-link active">Gestión OC</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="page-title">Gestión de órdenes de compra</div>
+  <div class="page-sub">// seguimiento de cobros y recepción de OC por cliente</div>
+
+  <div class="controls">
+    <select class="select-periodo" id="select-periodo" onchange="loadData()">
+      <option value="">Todos los períodos</option>
+    </select>
+    <button class="filter-btn active" onclick="setFilter('todos', this)">Todos</button>
+    <button class="filter-btn f-pendiente" onclick="setFilter('pendiente', this)">Pendientes</button>
+    <button class="filter-btn f-recibida" onclick="setFilter('recibida', this)">Recibidas</button>
+    <button class="filter-btn f-vencida" onclick="setFilter('vencida', this)">Vencidas</button>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi k-total">
+      <div class="kpi-label">Total clientes</div>
+      <div class="kpi-value" id="kpi-total">—</div>
+      <div class="kpi-sub" id="kpi-monto">USD 0</div>
+    </div>
+    <div class="kpi k-pendiente">
+      <div class="kpi-label">Pendientes OC</div>
+      <div class="kpi-value" id="kpi-pendiente">—</div>
+      <div class="kpi-sub" id="kpi-monto-pendiente">USD 0</div>
+    </div>
+    <div class="kpi k-recibida">
+      <div class="kpi-label">OC recibidas</div>
+      <div class="kpi-value" id="kpi-recibida">—</div>
+      <div class="kpi-sub" id="kpi-monto-recibida">USD 0</div>
+    </div>
+    <div class="kpi k-vencida">
+      <div class="kpi-label">Vencidas</div>
+      <div class="kpi-value" id="kpi-vencida">—</div>
+      <div class="kpi-sub" id="kpi-monto-vencida">USD 0</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Período</th>
+          <th>Monto USD</th>
+          <th>Estado</th>
+          <th>Correo cobro</th>
+          <th>Días restantes</th>
+          <th>OC</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body">
+        <tr><td colspan="8" class="loading">Cargando datos...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal correo cobro -->
+<div class="modal-overlay" id="modal-cobro">
+  <div class="modal">
+    <div class="modal-title">Registrar correo de cobro</div>
+    <div class="modal-sub" id="modal-cobro-sub">—</div>
+    <div class="form-group">
+      <label class="form-label">Fecha de envío</label>
+      <input type="date" class="form-input" id="input-fecha-cobro" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modal-cobro')">Cancelar</button>
+      <button class="btn-primary" onclick="guardarCobro()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal registrar OC -->
+<div class="modal-overlay" id="modal-oc">
+  <div class="modal">
+    <div class="modal-title">Registrar OC recibida</div>
+    <div class="modal-sub" id="modal-oc-sub">—</div>
+    <div class="form-group">
+      <label class="form-label">Número de OC</label>
+      <input type="text" class="form-input" id="input-numero-oc" placeholder="Ej: OC-2026-001" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Fecha de recepción</label>
+      <input type="date" class="form-input" id="input-fecha-oc" />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modal-oc')">Cancelar</button>
+      <button class="btn-success" onclick="guardarOC()">Marcar como recibida</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'https://billing-fn-node.azurewebsites.net/api';
+  var allData = [];
+  var currentFilter = 'todos';
+  var currentKey = null;
+
+  function getDiasRestantes(periodo) {
+    var now = new Date();
+    var parts = periodo.split('-');
+    var year = parseInt(parts[0]);
+    var month = parseInt(parts[1]);
+    var lastDay = new Date(year, month, 0).getDate();
+    var cierre = new Date(year, month - 1, lastDay);
+    var diff = Math.ceil((cierre - now) / (1000 * 60 * 60 * 24));
+    return diff;
+  }
+
+  function getEstadoEfectivo(record) {
+    if (record.estado === 'recibida') return 'recibida';
+    var dias = getDiasRestantes(record.periodo);
+    if (dias < 0) return 'vencida';
+    return 'pendiente';
+  }
+
+  async function loadData() {
+    var periodo = document.getElementById('select-periodo').value;
+    try {
+      var url = API + '/gestionar_oc' + (periodo ? '?periodo=' + periodo : '');
+      var res = await fetch(url);
+      allData = await res.json();
+      populatePeriodos();
+      renderTable();
+    } catch(e) {
+      document.getElementById('tabla-body').innerHTML = '<tr><td colspan="8" class="empty">Error cargando datos: ' + e.message + '</td></tr>';
+    }
+  }
+
+  function populatePeriodos() {
+    var sel = document.getElementById('select-periodo');
+    var current = sel.value;
+    var periodos = [...new Set(allData.map(function(r) { return r.periodo; }))].sort().reverse();
+    var opts = '<option value="">Todos los períodos</option>';
+    periodos.forEach(function(p) { opts += '<option value="' + p + '"' + (p === current ? ' selected' : '') + '>' + p + '</option>'; });
+    sel.innerHTML = opts;
+  }
+
+  function setFilter(f, btn) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    renderTable();
+  }
+
+  function renderTable() {
+    var filtered = allData.filter(function(r) {
+      var estado = getEstadoEfectivo(r);
+      if (currentFilter === 'todos') return true;
+      return estado === currentFilter;
+    });
+
+    // KPIs
+    var total = allData.length;
+    var pendientes = allData.filter(function(r) { return getEstadoEfectivo(r) === 'pendiente'; });
+    var recibidas = allData.filter(function(r) { return getEstadoEfectivo(r) === 'recibida'; });
+    var vencidas = allData.filter(function(r) { return getEstadoEfectivo(r) === 'vencida'; });
+    var sumAll = allData.reduce(function(s, r) { return s + (r.total || 0); }, 0);
+    var sumPend = pendientes.reduce(function(s, r) { return s + (r.total || 0); }, 0);
+    var sumRec = recibidas.reduce(function(s, r) { return s + (r.total || 0); }, 0);
+    var sumVenc = vencidas.reduce(function(s, r) { return s + (r.total || 0); }, 0);
+
+    document.getElementById('kpi-total').textContent = total;
+    document.getElementById('kpi-monto').textContent = 'USD ' + sumAll.toLocaleString('es-CL', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+    document.getElementById('kpi-pendiente').textContent = pendientes.length;
+    document.getElementById('kpi-monto-pendiente').textContent = 'USD ' + sumPend.toLocaleString('es-CL', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+    document.getElementById('kpi-recibida').textContent = recibidas.length;
+    document.getElementById('kpi-monto-recibida').textContent = 'USD ' + sumRec.toLocaleString('es-CL', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+    document.getElementById('kpi-vencida').textContent = vencidas.length;
+    document.getElementById('kpi-monto-vencida').textContent = 'USD ' + sumVenc.toLocaleString('es-CL', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+
+    if (filtered.length === 0) {
+      document.getElementById('tabla-body').innerHTML = '<tr><td colspan="8" class="empty">No hay registros</td></tr>';
+      return;
+    }
+
+    var html = '';
+    filtered.forEach(function(r) {
+      var estado = getEstadoEfectivo(r);
+      var dias = getDiasRestantes(r.periodo);
+      var diasHtml = '';
+      if (estado === 'recibida') {
+        diasHtml = '<span class="dias-ok">—</span>';
+      } else if (dias < 0) {
+        diasHtml = '<span class="dias-danger">Vencido ' + Math.abs(dias) + 'd</span>';
+      } else if (dias <= 9) {
+        diasHtml = '<span class="dias-danger">' + dias + ' días</span>';
+      } else if (dias <= 15) {
+        diasHtml = '<span class="dias-warn">' + dias + ' días</span>';
+      } else {
+        diasHtml = '<span class="dias-ok">' + dias + ' días</span>';
+      }
+
+      var badgeClass = estado === 'recibida' ? 'badge-recibida' : estado === 'vencida' ? 'badge-vencida' : 'badge-pendiente';
+      var badgeText = estado === 'recibida' ? 'Recibida' : estado === 'vencida' ? 'Vencida' : 'Pendiente';
+
+      var cobroHtml = r.fechaCobro
+        ? '<span class="badge badge-cobro">' + r.fechaCobro + '</span>'
+        : '<span class="td-mono">Sin registrar</span>';
+
+      var ocHtml = r.numeroOC
+        ? '<span class="td-mono" style="color:var(--success)">' + r.numeroOC + '</span>'
+        : '<span class="td-mono">—</span>';
+
+      var accionCobro = estado !== 'recibida'
+        ? '<button class="btn-accion btn-cobro" onclick="abrirModalCobro(\'' + r.key + '\',\'' + r.cliente + '\')">' + (r.fechaCobro ? 'Editar cobro' : 'Registrar cobro') + '</button>'
+        : '';
+      var accionOC = estado !== 'recibida'
+        ? '<button class="btn-accion btn-oc" onclick="abrirModalOC(\'' + r.key + '\',\'' + r.cliente + '\')">Marcar OC</button>'
+        : '';
+
+      html += '<tr>';
+      html += '<td class="td-cliente">' + r.cliente + '</td>';
+      html += '<td class="td-mono">' + r.periodo + '</td>';
+      html += '<td class="td-amount">$' + (r.total || 0).toLocaleString('es-CL', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + '</td>';
+      html += '<td><span class="badge ' + badgeClass + '">' + badgeText + '</span></td>';
+      html += '<td>' + cobroHtml + '</td>';
+      html += '<td>' + diasHtml + '</td>';
+      html += '<td>' + ocHtml + '</td>';
+      html += '<td style="display:flex;gap:6px">' + accionCobro + accionOC + '</td>';
+      html += '</tr>';
+    });
+    document.getElementById('tabla-body').innerHTML = html;
+  }
+
+  function abrirModalCobro(key, cliente) {
+    currentKey = key;
+    document.getElementById('modal-cobro-sub').textContent = cliente;
+    var record = allData.find(function(r) { return r.key === key; });
+    document.getElementById('input-fecha-cobro').value = record && record.fechaCobro ? record.fechaCobro : new Date().toISOString().slice(0,10);
+    document.getElementById('modal-cobro').classList.add('show');
+  }
+
+  function abrirModalOC(key, cliente) {
+    currentKey = key;
+    document.getElementById('modal-oc-sub').textContent = cliente;
+    document.getElementById('input-numero-oc').value = '';
+    document.getElementById('input-fecha-oc').value = new Date().toISOString().slice(0,10);
+    document.getElementById('modal-oc').classList.add('show');
+  }
+
+  function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+  async function guardarCobro() {
+    var fecha = document.getElementById('input-fecha-cobro').value;
+    if (!fecha) return;
+    try {
+      await fetch(API + '/gestionar_oc', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({key: currentKey, fechaCobro: fecha, estado: 'pendiente'})
+      });
+      closeModal('modal-cobro');
+      await loadData();
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+  async function guardarOC() {
+    var numero = document.getElementById('input-numero-oc').value.trim();
+    var fecha = document.getElementById('input-fecha-oc').value;
+    if (!numero || !fecha) { alert('Completa todos los campos'); return; }
+    try {
+      await fetch(API + '/gestionar_oc', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({key: currentKey, numeroOC: numero, fechaOC: fecha, estado: 'recibida'})
+      });
+      closeModal('modal-oc');
+      await loadData();
+    } catch(e) { alert('Error: ' + e.message); }
+  }
+
+  // Cerrar modal al hacer click fuera
+  document.querySelectorAll('.modal-overlay').forEach(function(el) {
+    el.addEventListener('click', function(e) { if (e.target === el) el.classList.remove('show'); });
+  });
+
+  loadData();
+</script>
+</body>
+</html>
