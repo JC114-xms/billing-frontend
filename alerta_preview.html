@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alertas Amigables</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0a0c10;--surface:#111318;--surface2:#181c23;
+    --border:#232830;--border2:#2e3440;
+    --accent:#3b82f6;--success:#10b981;--warn:#f59e0b;--danger:#ef4444;--purple:#8b5cf6;
+    --text:#e8eaf0;--muted:#6b7280;
+    --mono:'DM Mono',monospace;--sans:'Syne',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;opacity:.35;pointer-events:none;}
+  .topbar{display:flex;align-items:center;gap:16px;padding:20px 32px;border-bottom:1px solid var(--border);background:var(--surface);}
+  .logo{font-size:20px;font-weight:800;letter-spacing:-.5px;}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:8px;margin-left:auto;}
+  .nav-link{padding:8px 16px;border-radius:8px;font-size:13px;font-family:var(--mono);color:var(--muted);text-decoration:none;border:1px solid transparent;transition:all .15s;}
+  .nav-link:hover{color:var(--text);border-color:var(--border2);}
+  .nav-link.active{color:var(--accent);border-color:var(--accent);background:rgba(59,130,246,.08);}
+  .container{max-width:900px;margin:0 auto;padding:32px 24px;}
+  .page-title{font-size:28px;font-weight:800;letter-spacing:-.8px;margin-bottom:4px;}
+  .page-sub{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:28px;}
+
+  /* Controls */
+  .controls{display:flex;gap:12px;align-items:center;margin-bottom:28px;flex-wrap:wrap;}
+  .nivel-btn{padding:10px 20px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all .15s;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);}
+  .nivel-btn:hover{color:var(--text);}
+  .nivel-btn.aviso.active{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,.08);}
+  .nivel-btn.urgente.active{border-color:var(--warn);color:var(--warn);background:rgba(245,158,11,.08);}
+  .nivel-btn.critico.active{border-color:var(--danger);color:var(--danger);background:rgba(239,68,68,.08);}
+  .send-btn{padding:10px 24px;background:var(--success);color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:opacity .2s;margin-left:auto;}
+  .send-btn:hover{opacity:.85;}
+
+  /* Email preview frame */
+  .email-frame{background:var(--surface);border:1px solid var(--border2);border-radius:12px;overflow:hidden;}
+  .email-meta{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:6px;}
+  .email-meta-row{display:flex;gap:8px;font-size:12px;font-family:var(--mono);}
+  .email-meta-label{color:var(--muted);min-width:60px;}
+  .email-meta-value{color:var(--text);}
+  .email-subject{font-size:15px;font-weight:600;padding:16px 20px;border-bottom:1px solid var(--border);}
+  .email-body-wrap{padding:0;}
+  iframe#email-preview{width:100%;border:none;min-height:600px;background:#fff;}
+
+  .info-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap;}
+  .info-item{font-size:12px;font-family:var(--mono);}
+  .info-item span{color:var(--warn);font-weight:500;}
+  .info-item.ok span{color:var(--success);}
+  .info-item.danger span{color:var(--danger);}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="logo">Alertas <span>Amigables</span></div>
+  <nav class="nav-links">
+    <a href="index.html" class="nav-link">Cargar Excel</a>
+    <a href="gestion_oc.html" class="nav-link">Gestión OC</a>
+    <a href="correos.html" class="nav-link">Correos OC</a>
+    <a href="dashboard.html" class="nav-link">Dashboard</a>
+    <a href="alerta_preview.html" class="nav-link active">Alertas</a>
+  </nav>
+</div>
+
+<div class="container">
+  <div class="page-title">Sistema de alertas</div>
+  <div class="page-sub">// M365 Outlook · alertas automáticas días 21, 25 y 28 de cada mes</div>
+
+  <!-- Info estado actual -->
+  <div class="info-card" id="info-card">
+    <div class="info-item danger"><div>Días restantes</div><span id="info-dias">—</span></div>
+    <div class="info-item"><div>OC pendientes</div><span id="info-pendientes">—</span></div>
+    <div class="info-item"><div>Monto en riesgo</div><span id="info-monto">—</span></div>
+    <div class="info-item"><div>Período</div><span id="info-periodo">—</span></div>
+    <div class="info-item"><div>Próxima alerta automática</div><span id="info-proxima">—</span></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <span style="font-size:12px;color:var(--muted);font-family:var(--mono)">PREVISUALIZAR:</span>
+    <button class="nivel-btn aviso active" onclick="setNivel('aviso',this)">📋 Día 21 — Aviso</button>
+    <button class="nivel-btn urgente" onclick="setNivel('urgente',this)">⚠️ Día 25 — Urgente</button>
+    <button class="nivel-btn critico" onclick="setNivel('critico',this)">🚨 Día 28 — Crítico</button>
+    <button class="send-btn" onclick="simularEnvio()">📨 Simular envío</button>
+  </div>
+
+  <!-- Email preview -->
+  <div class="email-frame">
+    <div class="email-meta">
+      <div class="email-meta-row"><span class="email-meta-label">De:</span><span class="email-meta-value">Alertas Amigables &lt;jgutierrez@xms.cl&gt;</span></div>
+      <div class="email-meta-row"><span class="email-meta-label">Para:</span><span class="email-meta-value">jgutierrez@xms.cl</span></div>
+      <div class="email-meta-row"><span class="email-meta-label">Fecha:</span><span class="email-meta-value" id="meta-fecha">—</span></div>
+    </div>
+    <div class="email-subject" id="email-subject">Cargando...</div>
+    <div class="email-body-wrap">
+      <iframe id="email-preview" title="Preview del correo de alerta"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  const API = 'https://billing-fn-node.azurewebsites.net/api';
+  var currentNivel = 'aviso';
+  var dashData = { pendientes: 83, totalMonto: 375191, diasRestantes: 6, periodo: '2026-05' };
+
+  function getDias(periodo) {
+    var p = periodo.split('-'), y = parseInt(p[0]), m = parseInt(p[1]);
+    return Math.ceil((new Date(y, m, 0) - new Date()) / (1000 * 60 * 60 * 24));
+  }
+
+  async function loadData() {
+    try {
+      var res = await fetch(API + '/gestionar_oc');
+      var data = await res.json();
+      if (!data || data.length === 0) return;
+      var periodos = [...new Set(data.map(function(r){return r.periodo;}))].sort();
+      var last = periodos[periodos.length-1];
+      var current = data.filter(function(r){return r.periodo===last;});
+      var pend = current.filter(function(r){
+        if(r.estado==='recibida') return false;
+        return getDias(r.periodo) >= 0;
+      });
+      dashData = {
+        pendientes: pend.length,
+        totalMonto: pend.reduce(function(s,r){return s+(r.total||0);},0),
+        diasRestantes: getDias(last),
+        periodo: last,
+        topClientes: pend.slice().sort(function(a,b){return(b.total||0)-(a.total||0);}).slice(0,10)
+      };
+    } catch(e) {}
+
+    var dias = dashData.diasRestantes;
+    document.getElementById('info-dias').textContent = dias + ' días';
+    document.getElementById('info-pendientes').textContent = dashData.pendientes + ' clientes';
+    document.getElementById('info-monto').textContent = 'USD ' + Math.round(dashData.totalMonto).toLocaleString('es-CL');
+    document.getElementById('info-periodo').textContent = dashData.periodo;
+    var proxima = dias <= 3 ? 'Día 28 — CRÍTICO (activa)' : dias <= 6 ? 'Día 25 — URGENTE (activa)' : dias <= 9 ? 'Día 21 — AVISO (activa)' : 'Día 21 del mes';
+    document.getElementById('info-proxima').textContent = proxima;
+    document.getElementById('meta-fecha').textContent = new Date().toLocaleString('es-CL');
+
+    renderEmail();
+  }
+
+  function setNivel(nivel, btn) {
+    currentNivel = nivel;
+    document.querySelectorAll('.nivel-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    renderEmail();
+  }
+
+  function buildEmail(nivel, data) {
+    var color = nivel === 'critico' ? '#ef4444' : nivel === 'urgente' ? '#f59e0b' : '#3b82f6';
+    var emoji = nivel === 'critico' ? '🚨' : nivel === 'urgente' ? '⚠️' : '📋';
+    var diasLabel = nivel === 'critico' ? 28 : nivel === 'urgente' ? 25 : 21;
+    var titulo = nivel === 'critico' ? 'ALERTA CRÍTICA — ' + data.diasRestantes + ' días para cierre de mes' :
+                 nivel === 'urgente' ? 'ALERTA URGENTE — ' + data.diasRestantes + ' días para cierre de mes' :
+                 'RECORDATORIO — ' + data.diasRestantes + ' días para cierre de mes';
+
+    var clientes = (data.topClientes || [
+      {cliente:'GARCES FRUIT', total:58623, fechaCobro:'2026-05-20'},
+      {cliente:'AUTOMOTORES GILDEMEISTER S.A.', total:58171, fechaCobro:null},
+      {cliente:'Industrias de Aceite S.A.', total:52416, fechaCobro:'2026-05-18'},
+      {cliente:'Servicios Agrosistemas Ltda.', total:33105, fechaCobro:null},
+      {cliente:'Salmones Austral SPA', total:23713, fechaCobro:null},
+    ]).slice(0,8);
+
+    var rows = clientes.map(function(r) {
+      return '<tr style="border-bottom:1px solid #2e3440">' +
+        '<td style="padding:10px 14px;font-size:13px;color:#e8eaf0">' + r.cliente + '</td>' +
+        '<td style="padding:10px 14px;font-size:13px;text-align:right;color:#3b82f6;font-weight:600">USD ' + Math.round(r.total||0).toLocaleString() + '</td>' +
+        '<td style="padding:10px 14px;font-size:12px;color:' + (r.fechaCobro ? '#10b981' : '#ef4444') + '">' + (r.fechaCobro || '⚠ Sin registrar') + '</td>' +
+        '</tr>';
+    }).join('');
+
+    return '<!DOCTYPE html><html><head><meta charset="UTF-8"></head>' +
+      '<body style="margin:0;padding:20px;background:#0a0c10;font-family:Arial,sans-serif">' +
+      '<div style="max-width:580px;margin:0 auto">' +
+      '<div style="background:#111318;border:1px solid ' + color + ';border-radius:12px;overflow:hidden">' +
+      '<div style="background:' + color + ';padding:24px">' +
+      '<div style="font-size:22px;font-weight:800;color:#fff">' + emoji + ' Alertas Amigables</div>' +
+      '<div style="font-size:14px;color:rgba(255,255,255,0.85);margin-top:6px">' + titulo + '</div>' +
+      '<div style="font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px">Período: ' + data.periodo + ' · Enviado automáticamente el día ' + diasLabel + '</div>' +
+      '</div>' +
+      '<div style="padding:24px">' +
+      '<div style="display:flex;gap:12px;margin-bottom:24px">' +
+      '<div style="flex:1;background:#181c23;border-radius:8px;padding:16px;text-align:center;border:1px solid #2e3440">' +
+      '<div style="font-size:26px;font-weight:800;color:' + color + '">' + data.pendientes + '</div>' +
+      '<div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Clientes pendientes</div>' +
+      '</div>' +
+      '<div style="flex:1;background:#181c23;border-radius:8px;padding:16px;text-align:center;border:1px solid #2e3440">' +
+      '<div style="font-size:26px;font-weight:800;color:' + color + '">USD ' + Math.round((data.totalMonto||0)/1000) + 'K</div>' +
+      '<div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Monto en riesgo</div>' +
+      '</div>' +
+      '<div style="flex:1;background:#181c23;border-radius:8px;padding:16px;text-align:center;border:1px solid #2e3440">' +
+      '<div style="font-size:26px;font-weight:800;color:' + color + '">' + data.diasRestantes + '</div>' +
+      '<div style="font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Días restantes</div>' +
+      '</div>' +
+      '</div>' +
+      '<div style="font-size:12px;color:#6b7280;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px">Top clientes pendientes</div>' +
+      '<table style="width:100%;border-collapse:collapse;background:#181c23;border-radius:8px;overflow:hidden">' +
+      '<thead><tr style="background:#232830">' +
+      '<th style="padding:10px 14px;text-align:left;font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px">Cliente</th>' +
+      '<th style="padding:10px 14px;text-align:right;font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px">Monto</th>' +
+      '<th style="padding:10px 14px;text-align:left;font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:1px">Correo cobro</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table>' +
+      '<div style="margin-top:24px;text-align:center">' +
+      '<a href="https://thankful-beach-06df4730f.7.azurestaticapps.net/gestion_oc.html" ' +
+      'style="display:inline-block;padding:14px 28px;background:' + color + ';color:#fff;border-radius:8px;text-decoration:none;font-weight:700;font-size:14px">Ver gestión OC →</a>' +
+      '</div>' +
+      '</div>' +
+      '<div style="padding:16px 24px;background:#0d1117;text-align:center;font-size:11px;color:#6b7280">' +
+      'Alertas Amigables · XMS Technologies Spa · Sistema automatizado de seguimiento de OC<br>' +
+      'Alertas enviadas los días 21 (aviso) · 25 (urgente) · 28 (crítico) de cada mes' +
+      '</div>' +
+      '</div></div></body></html>';
+  }
+
+  function renderEmail() {
+    var nivel = currentNivel;
+    var color = nivel === 'critico' ? '#ef4444' : nivel === 'urgente' ? '#f59e0b' : '#3b82f6';
+    var emoji = nivel === 'critico' ? '🚨 CRÍTICO' : nivel === 'urgente' ? '⚠️ URGENTE' : '📋 Recordatorio';
+    var diasLabel = nivel === 'critico' ? 28 : nivel === 'urgente' ? 25 : 21;
+
+    document.getElementById('email-subject').textContent =
+      emoji + ' — ' + dashData.pendientes + ' OC pendientes · Cierre en ' + dashData.diasRestantes + ' días · ' + dashData.periodo;
+
+    var html = buildEmail(nivel, dashData);
+    var iframe = document.getElementById('email-preview');
+    iframe.srcdoc = html;
+  }
+
+  function simularEnvio() {
+    var btn = document.querySelector('.send-btn');
+    btn.textContent = '✓ Alerta simulada enviada';
+    btn.style.background = 'var(--success)';
+    btn.disabled = true;
+    setTimeout(function() {
+      btn.textContent = '📨 Simular envío';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+
+    // Mostrar notificación
+    var notif = document.createElement('div');
+    notif.style.cssText = 'position:fixed;top:20px;right:20px;background:#10b981;color:#fff;padding:14px 20px;border-radius:10px;font-family:var(--mono);font-size:13px;z-index:9999;animation:slideIn .3s ease';
+    notif.textContent = '✓ Correo de alerta enviado a jgutierrez@xms.cl';
+    document.body.appendChild(notif);
+    setTimeout(function() { notif.remove(); }, 4000);
+  }
+
+  loadData();
+</script>
+</body>
+</html>
