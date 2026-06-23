@@ -27,7 +27,6 @@
   .page-title{font-size:28px;font-weight:800;letter-spacing:-.8px;margin-bottom:4px;}
   .page-sub{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:28px;}
 
-  /* Banner IA */
   .ia-banner{background:var(--surface);border:1px solid var(--purple);border-radius:12px;padding:16px 20px;margin-bottom:24px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;}
   .ia-banner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--accent));}
   .ia-badge{font-size:10px;font-family:var(--mono);padding:3px 10px;border-radius:20px;background:rgba(139,92,246,.12);color:var(--purple);border:1px solid rgba(139,92,246,.3);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
@@ -37,18 +36,19 @@
   .btn-scan:hover{opacity:.85;}
   .btn-scan:disabled{opacity:.4;cursor:not-allowed;}
 
-  /* Stats */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
-  .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;position:relative;overflow:hidden;}
+  /* Stats — ahora 5 */
+  .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px;}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;position:relative;overflow:hidden;}
   .stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
   .stat.s-total::before{background:var(--accent);}
+  .stat.s-reporte::before{background:#3b82f6;}
   .stat.s-oc::before{background:var(--success);}
   .stat.s-pendiente::before{background:var(--warn);}
   .stat.s-procesado::before{background:var(--purple);}
   .stat-label{font-size:10px;font-family:var(--mono);color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;}
-  .stat-value{font-size:24px;font-weight:800;letter-spacing:-1px;}
+  .stat-value{font-size:22px;font-weight:800;letter-spacing:-1px;}
+  .stat-sub{font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:3px;}
 
-  /* Flujo tabs */
   .flujo-tabs{display:flex;gap:0;margin-bottom:20px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:6px;flex-wrap:wrap;}
   .flujo-tab{padding:8px 14px;border-radius:7px;font-size:11px;font-family:var(--mono);color:var(--muted);cursor:pointer;border:1px solid transparent;transition:all .15s;letter-spacing:.3px;display:flex;align-items:center;gap:6px;flex:1;justify-content:center;}
   .flujo-tab:hover{color:var(--text);}
@@ -58,13 +58,11 @@
   .flujo-tab.active-oc{color:#10b981;border-color:#10b981;background:rgba(16,185,129,.08);}
   .tab-count{font-size:10px;padding:1px 6px;border-radius:10px;font-weight:700;}
 
-  /* Tabs filtro (todos/oc/otros) */
   .tabs{display:flex;gap:8px;margin-bottom:16px;}
   .tab{padding:6px 14px;border-radius:8px;font-size:11px;font-family:var(--mono);color:var(--muted);cursor:pointer;border:1px solid var(--border);background:var(--surface);transition:all .15s;letter-spacing:.5px;text-transform:uppercase;}
   .tab:hover{color:var(--text);border-color:var(--border2);}
   .tab.active{color:var(--accent);border-color:var(--accent);background:rgba(59,130,246,.08);}
 
-  /* Seccion de flujo */
   .flujo-section{margin-bottom:24px;}
   .flujo-header{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;margin-bottom:10px;}
   .flujo-header.tipo-reporte{background:rgba(59,130,246,.06);border-left:3px solid #3b82f6;}
@@ -73,7 +71,6 @@
   .flujo-title{font-size:13px;font-weight:700;flex:1;}
   .flujo-badge{font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:10px;}
 
-  /* Correos list */
   .correos-list{display:flex;flex-direction:column;gap:10px;}
   .correo-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;transition:border-color .2s;position:relative;overflow:hidden;}
   .correo-card:hover{border-color:var(--border2);}
@@ -96,29 +93,43 @@
   .badge-alta{background:rgba(16,185,129,.12);color:var(--success);border:1px solid rgba(16,185,129,.2);}
   .badge-media{background:rgba(245,158,11,.12);color:var(--warn);border:1px solid rgba(245,158,11,.2);}
   .badge-baja{background:rgba(239,68,68,.1);color:var(--danger);border:1px solid rgba(239,68,68,.2);}
-  .badge-pdf{background:rgba(59,130,246,.1);color:#3b82f6;border:1px solid rgba(59,130,246,.2);}
+  .source-tag{font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:4px;background:rgba(59,130,246,.08);color:#3b82f6;border:1px solid rgba(59,130,246,.15);}
+
+  /* Bloque reporte AM */
+  .reporte-am-block{background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:12px 14px;margin-top:10px;}
+  .reporte-am-title{font-size:10px;font-family:var(--mono);color:#3b82f6;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+  .reporte-am-clientes{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;}
+  .cliente-chip{font-size:10px;font-family:var(--mono);padding:2px 8px;border-radius:10px;background:rgba(59,130,246,.1);color:#93c5fd;border:1px solid rgba(59,130,246,.2);}
+  .cliente-chip.marcado{background:rgba(16,185,129,.12);color:var(--success);border-color:rgba(16,185,129,.3);}
+  .btn-marcar-am{padding:7px 16px;background:#1d4ed8;color:#fff;border:none;border-radius:6px;font-family:var(--mono);font-size:11px;cursor:pointer;transition:opacity .2s;font-weight:600;}
+  .btn-marcar-am:hover{opacity:.85;}
+  .btn-marcar-am:disabled{opacity:.4;cursor:not-allowed;}
+  .am-marcado-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-family:var(--mono);color:var(--success);padding:4px 10px;border-radius:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);}
+
   .oc-info{background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:8px;padding:10px 14px;margin-top:10px;display:flex;gap:20px;flex-wrap:wrap;}
   .oc-field{font-size:11px;font-family:var(--mono);}
   .oc-field span{color:var(--success);font-weight:500;}
   .btn-aplicar{padding:6px 14px;background:var(--success);color:#fff;border:none;border-radius:6px;font-family:var(--mono);font-size:11px;cursor:pointer;transition:opacity .2s;margin-left:auto;}
   .btn-aplicar:hover{opacity:.85;}
-  .btn-aplicar:disabled{opacity:.4;cursor:not-allowed;}
   .procesado-badge{font-size:10px;font-family:var(--mono);color:var(--success);padding:3px 8px;border-radius:4px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);}
-  .source-tag{font-size:9px;font-family:var(--mono);padding:2px 7px;border-radius:4px;background:rgba(59,130,246,.08);color:#3b82f6;border:1px solid rgba(59,130,246,.15);}
 
-  /* Scanning overlay */
   .scanning{text-align:center;padding:48px;color:var(--muted);font-family:var(--mono);font-size:13px;}
   .scan-dot{display:inline-block;animation:blink 1s infinite;}
   @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
   .empty{text-align:center;padding:60px;color:var(--muted);font-family:var(--mono);font-size:13px;}
-
-  /* Upload hint */
-  .upload-hint{background:var(--surface);border:1px dashed var(--border2);border-radius:8px;padding:16px 20px;margin-bottom:16px;font-size:12px;font-family:var(--mono);color:var(--muted);display:flex;align-items:center;gap:10px;}
+  .upload-hint{background:var(--surface);border:1px dashed var(--border2);border-radius:8px;padding:16px 20px;margin-bottom:16px;font-size:12px;font-family:var(--mono);color:var(--muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
   .upload-hint a{color:var(--accent);text-decoration:none;}
-  .upload-hint a:hover{text-decoration:underline;}
+
+  /* Toast */
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--success);border-radius:10px;padding:14px 20px;font-size:13px;font-family:var(--mono);color:var(--success);z-index:300;transform:translateY(80px);opacity:0;transition:all .3s;max-width:380px;line-height:1.5;}
+  .toast.show{transform:translateY(0);opacity:1;}
+  .toast.error{border-color:var(--danger);color:var(--danger);}
 </style>
 </head>
 <body>
+
+<div class="toast" id="toast"></div>
+
 <div class="topbar">
   <div class="logo">Alertas <span>Amigables</span></div>
   <nav class="nav-links">
@@ -134,35 +145,48 @@
   <div class="page-title">Detección de OC en correos</div>
   <div class="page-sub">// Blob Storage PDF + Azure OpenAI GPT-4o · flujo completo de cobro</div>
 
-  <!-- Banner IA -->
   <div class="ia-banner">
     <span class="ia-badge">Azure OpenAI · GPT-4o</span>
     <div class="ia-desc">
       <strong>Análisis inteligente de correos PDF</strong> — GPT-4o lee los correos subidos al Blob Storage
-      en las 3 etapas del flujo: reporte interno → gestión con cliente → OC recibida para facturar.
+      en las 3 etapas del flujo. Los reportes internos marcan automáticamente el check <strong>Reporte AM</strong> en Gestión OC.
     </div>
     <button class="btn-scan" id="btn-scan" onclick="escanear()">⚡ Escanear correos</button>
   </div>
 
-  <!-- Hint de carga de PDFs -->
   <div class="upload-hint">
-    📁 Sube PDFs de correos al
-    <a href="https://portal.azure.com" target="_blank">Blob Storage</a>:
+    📁 Sube PDFs al <a href="https://portal.azure.com" target="_blank">Blob Storage</a>:
     <strong style="color:#3b82f6">correos-reporte-interno</strong> ·
     <strong style="color:#8b5cf6">correos-ejecutiva-cliente</strong> ·
     <strong style="color:#10b981">correos-oc-cliente</strong>
-    — GPT-4o los analizará automáticamente.
   </div>
 
-  <!-- Stats -->
+  <!-- Stats — 5 tarjetas -->
   <div class="stats">
-    <div class="stat s-total"><div class="stat-label">Correos analizados</div><div class="stat-value" id="stat-total">0</div></div>
-    <div class="stat s-oc"><div class="stat-label">OC detectadas</div><div class="stat-value" id="stat-oc">0</div></div>
-    <div class="stat s-pendiente"><div class="stat-label">Sin procesar</div><div class="stat-value" id="stat-pendiente">0</div></div>
-    <div class="stat s-procesado"><div class="stat-label">Aplicadas al sistema</div><div class="stat-value" id="stat-procesado">0</div></div>
+    <div class="stat s-total">
+      <div class="stat-label">Total analizados</div>
+      <div class="stat-value" id="stat-total">0</div>
+    </div>
+    <div class="stat s-reporte">
+      <div class="stat-label">Reportes internos</div>
+      <div class="stat-value" id="stat-reporte">0</div>
+      <div class="stat-sub" id="stat-reporte-am">0 marcados en AM</div>
+    </div>
+    <div class="stat s-oc">
+      <div class="stat-label">OC detectadas</div>
+      <div class="stat-value" id="stat-oc">0</div>
+    </div>
+    <div class="stat s-pendiente">
+      <div class="stat-label">Sin procesar</div>
+      <div class="stat-value" id="stat-pendiente">0</div>
+    </div>
+    <div class="stat s-procesado">
+      <div class="stat-label">Aplicadas</div>
+      <div class="stat-value" id="stat-procesado">0</div>
+    </div>
   </div>
 
-  <!-- Tabs de flujo (los 3 contenedores) -->
+  <!-- Tabs flujo -->
   <div class="flujo-tabs">
     <div class="flujo-tab active-all" id="ftab-todos" onclick="setFlujoTab('todos')">
       📨 Todos <span class="tab-count" id="cnt-todos" style="background:rgba(59,130,246,.15);color:#3b82f6">0</span>
@@ -178,30 +202,35 @@
     </div>
   </div>
 
-  <!-- Tabs filtro -->
   <div class="tabs">
     <div class="tab active" onclick="setTab('todos',this)">Todos</div>
     <div class="tab" onclick="setTab('oc',this)">OC detectadas</div>
     <div class="tab" onclick="setTab('otros',this)">Otros correos</div>
   </div>
 
-  <!-- Lista -->
   <div class="correos-list" id="correos-list">
     <div class="empty">Haz clic en "Escanear correos" para analizar los PDFs con GPT-4o</div>
   </div>
 </div>
 
 <script>
-  // ── Config ────────────────────────────────────────────────────────────────
-  var API = 'https://billing-fn-node.azurewebsites.net/api';
+  var API            = 'https://billing-fn-node.azurewebsites.net/api';
   var FUNCTION_PDF_URL = 'https://billing-fn-node.azurewebsites.net/api/leerCorreosPDF';
-  var FUNCTION_KEY = '';  // dejar vacío si usas authLevel anonymous, o poner tu key
+  var FUNCTION_KEY   = '';
 
   var allCorreos   = [];
   var currentTab   = 'todos';
   var currentFlujo = 'todos';
 
-  // ── Datos demo realistas por contenedor ──────────────────────────────────
+  // ── Toast ─────────────────────────────────────────────────────────────────
+  function showToast(msg, esError) {
+    var t = document.getElementById('toast');
+    t.innerHTML = msg;
+    t.className = 'toast' + (esError ? ' error' : '') + ' show';
+    setTimeout(function(){ t.className = 'toast' + (esError ? ' error' : ''); }, 4000);
+  }
+
+  // ── Datos demo ────────────────────────────────────────────────────────────
   var DEMO_DATA = {
     'correos-reporte-interno': [
       {
@@ -213,14 +242,16 @@
         es_oc: false,
         confianza: 'alta',
         procesado: false,
+        amMarcado: false,
         fuente: 'blob-pdf',
-        cuerpo: 'Resumen mensual: 85 clientes activos, USD 405.380 en facturación. 83 OC pendientes. Clientes críticos: Archivo Nacional ($5.427), arcoprime.onmicrosoft.com (-$5.389). Alertas días 28/31.',
+        cuerpo: 'Resumen mensual: 85 clientes activos, USD 405.380 en facturación. 83 OC pendientes.',
         analisisIA: {
           estado: 'informativo',
           accion: 'solo_informativo',
           cliente: 'CSP — XMS Technologies',
-          periodo: 'Mayo 2026',
+          periodo: '2026-05',
           monto: 'USD 405.380',
+          clientesReporte: ['ACF S.A.','Archivo Nacional','Aquabench S.A.','ARQ-CUBE LTDA'],
           alertas: ['83 OC pendientes', '2 clientes con saldo negativo']
         }
       }
@@ -236,43 +267,22 @@
         confianza: 'alta',
         procesado: false,
         fuente: 'blob-pdf',
-        cuerpo: 'Estimado equipo HORTIFRUT, junto con saludar les hacemos llegar el detalle del consumo Azure correspondiente al mes de mayo 2026 por un total de USD 18.450. Solicitamos emitir OC antes del 30/05.',
+        cuerpo: 'Estimado equipo HORTIFRUT, les hacemos llegar el detalle del consumo Azure mayo 2026 por USD 18.450.',
         analisisIA: {
           estado: 'pendiente',
           accion: 'solicitar_informacion',
           cliente: 'HORTIFRUT S.A.',
-          periodo: 'Mayo 2026',
+          periodo: '2026-05',
           monto: 'USD 18.450',
           fechaLimiteOC: '2026-05-30',
-          alertas: ['OC no recibida aún', 'Fecha límite: 30/05']
-        }
-      },
-      {
-        archivo: 'correo-ejecutiva-archivo-nacional.pdf',
-        asunto: 'Solicitud OC — Servicios Cloud Junio 2026 — Archivo Nacional',
-        remitente: 'Valentina González (ejecutiva)',
-        fecha: '2026-05-28',
-        flujo: 'ejecutiva',
-        es_oc: false,
-        confianza: 'alta',
-        procesado: false,
-        fuente: 'blob-pdf',
-        cuerpo: 'Estimados, adjunto detalle de consumo de servicios cloud correspondiente a junio 2026 por USD 5.427,84. Favor emitir OC a nombre de XMS Technologies SpA RUT 76.XXX.XXX-X antes del día 30.',
-        analisisIA: {
-          estado: 'pendiente',
-          accion: 'solicitar_informacion',
-          cliente: 'Archivo Nacional',
-          periodo: 'Junio 2026',
-          monto: 'USD 5.427,84',
-          fechaLimiteOC: '2026-06-30',
-          alertas: ['OC pendiente de recepción']
+          alertas: ['OC no recibida aún']
         }
       }
     ],
     'correos-oc-cliente': [
       {
         archivo: 'oc-hortifrut-mayo-2026.pdf',
-        asunto: 'OC N°HF-2026-042 — Consumo Azure Febrero/Marzo/Abril 2026',
+        asunto: 'OC N°HF-2026-042 — Consumo Azure',
         remitente: 'Carla Herrera Soto (HORTIFRUT)',
         fecha: '2026-05-26',
         flujo: 'oc',
@@ -282,319 +292,334 @@
         confianza: 'alta',
         procesado: false,
         fuente: 'blob-pdf',
-        cuerpo: 'Junto con saludar, enviamos OC N°HF-2026-042 correspondiente al consumo Azure de los meses febrero, marzo y abril 2026. Monto total USD 18.450. Favor emitir factura a nombre de HORTIFRUT S.A. RUT 76.XXX.XXX-X.',
+        cuerpo: 'Enviamos OC N°HF-2026-042 por USD 18.450.',
         analisisIA: {
           estado: 'completa',
           accion: 'enviar_a_facturar',
           cliente: 'HORTIFRUT S.A.',
           numeroOC: 'OC-HF-2026-042',
           monto: 'USD 18.450',
-          periodo: 'Feb/Mar/Abr 2026',
-          alertas: []
-        }
-      },
-      {
-        archivo: 'oc-xms-power-bi-mayo.pdf',
-        asunto: 'OC N°4700631355 — Licencias Power BI Pro Mayo 2026',
-        remitente: 'Carla Herrera Soto',
-        fecha: '2026-05-25',
-        flujo: 'oc',
-        es_oc: true,
-        numero_oc: '4700631355',
-        cliente: 'XMS Technologies Spa',
-        confianza: 'alta',
-        procesado: false,
-        fuente: 'blob-pdf',
-        cuerpo: 'Estimado equipo, adjunto orden de compra N°4700631355 por concepto de licencias Power BI Pro para el periodo mayo 2026. Monto: USD 413,46.',
-        analisisIA: {
-          estado: 'completa',
-          accion: 'enviar_a_facturar',
-          cliente: 'XMS Technologies Spa',
-          numeroOC: '4700631355',
-          monto: 'USD 413,46',
-          periodo: 'Mayo 2026',
+          periodo: '2026-05',
           alertas: []
         }
       }
     ]
   };
 
-  // ── Cambiar tab de flujo ──────────────────────────────────────────────────
+  // ── Tabs ──────────────────────────────────────────────────────────────────
   function setFlujoTab(flujo) {
     currentFlujo = flujo;
     ['todos','reporte','ejecutiva','oc'].forEach(function(t) {
-      var el = document.getElementById('ftab-' + t);
-      if (!el) return;
-      el.className = 'flujo-tab' + (t === flujo ? ' active-' + flujo : '');
+      var el = document.getElementById('ftab-'+t);
+      if (el) el.className = 'flujo-tab' + (t===flujo?' active-'+flujo:'');
     });
     renderCorreos();
   }
-
   function setTab(tab, btn) {
     currentTab = tab;
-    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
     btn.classList.add('active');
     renderCorreos();
   }
 
-  // ── Render correos ────────────────────────────────────────────────────────
+  // ── Stats ─────────────────────────────────────────────────────────────────
+  function updateStats() {
+    var ocs       = allCorreos.filter(function(c){ return c.es_oc; });
+    var procesadas = ocs.filter(function(c){ return c.procesado; });
+    var reportes  = allCorreos.filter(function(c){ return c.flujo==='reporte'; });
+    var amMarcados = reportes.filter(function(c){ return c.amMarcado; });
+
+    document.getElementById('stat-total').textContent    = allCorreos.length;
+    document.getElementById('stat-reporte').textContent  = reportes.length;
+    document.getElementById('stat-reporte-am').textContent = amMarcados.length + ' marcado' + (amMarcados.length!==1?'s':'') + ' en AM';
+    document.getElementById('stat-oc').textContent       = ocs.length;
+    document.getElementById('stat-pendiente').textContent = ocs.length - procesadas.length;
+    document.getElementById('stat-procesado').textContent = procesadas.length;
+
+    document.getElementById('cnt-todos').textContent     = allCorreos.length;
+    document.getElementById('cnt-reporte').textContent   = reportes.length;
+    document.getElementById('cnt-ejecutiva').textContent = allCorreos.filter(function(c){ return c.flujo==='ejecutiva'; }).length;
+    document.getElementById('cnt-oc').textContent        = ocs.length;
+  }
+
+  // ── Render ────────────────────────────────────────────────────────────────
   function renderCorreos() {
     var list = document.getElementById('correos-list');
     if (allCorreos.length === 0) {
       list.innerHTML = '<div class="empty">Haz clic en "Escanear correos" para analizar los PDFs con GPT-4o</div>';
       return;
     }
-
-    // Filtrar por flujo
-    var porFlujo = allCorreos.filter(function(c) {
-      if (currentFlujo === 'todos') return true;
-      return c.flujo === currentFlujo;
+    var porFlujo = allCorreos.filter(function(c){
+      if (currentFlujo==='todos') return true;
+      return c.flujo===currentFlujo;
     });
-
-    // Filtrar por tab
-    var filtered = porFlujo.filter(function(c) {
-      if (currentTab === 'oc') return c.es_oc;
-      if (currentTab === 'otros') return !c.es_oc;
+    var filtered = porFlujo.filter(function(c){
+      if (currentTab==='oc') return c.es_oc;
+      if (currentTab==='otros') return !c.es_oc;
       return true;
     });
-
     if (filtered.length === 0) {
       list.innerHTML = '<div class="empty">No hay correos en esta categoría</div>';
       return;
     }
-
-    // Agrupar por flujo si estamos en "todos"
     if (currentFlujo === 'todos') {
       var grupos = {
-        reporte:   { label: '📊 Reporte Interno → Ejecutiva',    clase: 'tipo-reporte',   color: '#3b82f6', items: [] },
-        ejecutiva: { label: '📤 Ejecutiva → Cliente',             clase: 'tipo-ejecutiva', color: '#8b5cf6', items: [] },
-        oc:        { label: '📥 Respuesta Cliente — OC Recibida', clase: 'tipo-oc',        color: '#10b981', items: [] }
+        reporte:   { label:'📊 Reporte Interno → Ejecutiva AM', clase:'tipo-reporte', color:'#3b82f6', items:[] },
+        ejecutiva: { label:'📤 Ejecutiva → Cliente',             clase:'tipo-ejecutiva', color:'#8b5cf6', items:[] },
+        oc:        { label:'📥 Respuesta Cliente — OC Recibida', clase:'tipo-oc',     color:'#10b981', items:[] }
       };
-      filtered.forEach(function(c) {
-        if (grupos[c.flujo]) grupos[c.flujo].items.push(c);
-      });
-
-      list.innerHTML = Object.entries(grupos).map(function(entry) {
-        var key = entry[0], g = entry[1];
-        if (g.items.length === 0) return '';
-        return '<div class="flujo-section">' +
-          '<div class="flujo-header ' + g.clase + '">' +
-            '<div class="flujo-title">' + g.label + '</div>' +
-            '<span class="flujo-badge" style="background:' + g.color + '15;color:' + g.color + ';border:1px solid ' + g.color + '30">' + g.items.length + ' correo' + (g.items.length !== 1 ? 's' : '') + '</span>' +
-          '</div>' +
-          g.items.map(function(c, i) { return renderCard(c, i); }).join('') +
+      filtered.forEach(function(c){ if(grupos[c.flujo]) grupos[c.flujo].items.push(c); });
+      list.innerHTML = Object.entries(grupos).map(function(entry){
+        var key=entry[0], g=entry[1];
+        if (g.items.length===0) return '';
+        return '<div class="flujo-section">'+
+          '<div class="flujo-header '+g.clase+'">'+
+            '<div class="flujo-title">'+g.label+'</div>'+
+            '<span class="flujo-badge" style="background:'+g.color+'15;color:'+g.color+';border:1px solid '+g.color+'30">'+g.items.length+' correo'+(g.items.length!==1?'s':'')+'</span>'+
+          '</div>'+
+          g.items.map(renderCard).join('')+
         '</div>';
       }).join('');
     } else {
-      list.innerHTML = filtered.map(function(c, i) { return renderCard(c, i); }).join('');
+      list.innerHTML = filtered.map(renderCard).join('');
     }
   }
 
-  function renderCard(c, i) {
-    var initial = (c.remitente || 'X')[0].toUpperCase();
+  function renderCard(c) {
+    var initial = (c.remitente||'X')[0].toUpperCase();
     var colors  = ['#3b82f6','#10b981','#8b5cf6','#f59e0b','#ef4444','#f97316'];
-    var color   = colors[(c.remitente || '').length % colors.length];
+    var color   = colors[(c.remitente||'').length % colors.length];
     var ia      = c.analisisIA || {};
 
     var claseCard = 'correo-card';
     if (c.es_oc) claseCard += ' es-oc';
-    else if (c.flujo === 'reporte') claseCard += ' tipo-reporte';
-    else if (c.flujo === 'ejecutiva') claseCard += ' tipo-ejecutiva';
+    else if (c.flujo==='reporte') claseCard += ' tipo-reporte';
+    else if (c.flujo==='ejecutiva') claseCard += ' tipo-ejecutiva';
     else claseCard += ' no-oc';
 
-    // Bloque de datos IA
-    var iaHtml = '';
-    if (ia && (ia.cliente || ia.monto || ia.periodo || ia.fechaLimiteOC)) {
-      var campos = [
-        ia.cliente         && ['Cliente', ia.cliente],
-        ia.numeroOC        && ['N° OC', ia.numeroOC],
-        ia.monto           && ['Monto', ia.monto],
-        ia.periodo         && ['Período', ia.periodo],
-        ia.fechaLimiteOC   && ['Límite OC', ia.fechaLimiteOC],
-      ].filter(Boolean);
+    // Bloque especial para reportes internos
+    var reporteAmHtml = '';
+    if (c.flujo === 'reporte') {
+      var clientes = ia.clientesReporte || [];
+      var clientesHtml = clientes.length > 0
+        ? clientes.map(function(cl){
+            return '<span class="cliente-chip'+(c.amMarcado?' marcado':'')+'">'+esc(cl)+'</span>';
+          }).join('')
+        : '<span style="font-size:11px;color:var(--muted);font-family:var(--mono);">GPT-4o extraerá la lista de clientes del PDF</span>';
 
-      if (campos.length > 0) {
-        iaHtml += '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.12);border-radius:7px;padding:9px 13px;margin-top:10px;">' +
-          '<div style="font-size:9px;font-family:var(--mono);color:var(--muted);margin-bottom:6px;letter-spacing:1px;">🤖 GPT-4o EXTRAJO</div>' +
-          '<div style="display:flex;gap:16px;flex-wrap:wrap;">' +
-          campos.map(function(f) {
-            return '<div style="font-size:11px;font-family:var(--mono);">' +
-              '<span style="color:var(--muted)">' + f[0] + ': </span>' +
-              '<span style="color:var(--success);font-weight:500">' + f[1] + '</span>' +
-              '</div>';
-          }).join('') +
-          '</div></div>';
-      }
+      var btnAM = c.amMarcado
+        ? '<span class="am-marcado-badge">✓ Reporte AM marcado en Gestión OC</span>'
+        : '<button class="btn-marcar-am" onclick="marcarReporteAM(\''+esc(c.archivo)+'\')">📊 Marcar Reporte AM en Gestión OC</button>';
 
-      // Alertas
-      if (ia.alertas && ia.alertas.length > 0) {
-        iaHtml += '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">' +
-          ia.alertas.map(function(a) {
-            return '<span style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:2px 8px;font-size:9px;font-family:var(--mono);color:var(--warn);">⚠ ' + a + '</span>';
-          }).join('') +
-          '</div>';
-      }
+      reporteAmHtml = '<div class="reporte-am-block">'+
+        '<div class="reporte-am-title">📊 Reporte Interno — Acción en Gestión OC</div>'+
+        '<div class="reporte-am-clientes">'+clientesHtml+'</div>'+
+        btnAM+
+      '</div>';
     }
 
-    // Bloque OC para registrar
+    // Datos IA genéricos
+    var iaHtml = '';
+    var campos = [
+      ia.cliente       && ['Cliente', ia.cliente],
+      ia.numeroOC      && ['N° OC',   ia.numeroOC],
+      ia.monto         && ['Monto',   ia.monto],
+      ia.periodo       && ['Período', ia.periodo],
+      ia.fechaLimiteOC && ['Límite OC', ia.fechaLimiteOC],
+    ].filter(Boolean);
+    if (campos.length > 0 && c.flujo !== 'reporte') {
+      iaHtml = '<div style="background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.12);border-radius:7px;padding:9px 13px;margin-top:10px;">'+
+        '<div style="font-size:9px;font-family:var(--mono);color:var(--muted);margin-bottom:6px;letter-spacing:1px;">🤖 GPT-4o EXTRAJO</div>'+
+        '<div style="display:flex;gap:16px;flex-wrap:wrap;">'+
+        campos.map(function(f){
+          return '<div style="font-size:11px;font-family:var(--mono);"><span style="color:var(--muted)">'+f[0]+': </span><span style="color:var(--success);font-weight:500">'+esc(f[1])+'</span></div>';
+        }).join('')+
+        '</div></div>';
+    }
+    if (ia.alertas && ia.alertas.length > 0) {
+      iaHtml += '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;">'+
+        ia.alertas.map(function(a){
+          return '<span style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:2px 8px;font-size:9px;font-family:var(--mono);color:var(--warn);">⚠ '+esc(a)+'</span>';
+        }).join('')+'</div>';
+    }
+
+    // Bloque OC
     var ocHtml = '';
     if (c.es_oc) {
-      ocHtml = '<div class="oc-info">' +
-        '<div class="oc-field">N° OC: <span>' + (c.numero_oc || ia.numeroOC || 'Por confirmar') + '</span></div>' +
-        '<div class="oc-field">Cliente: <span>' + (c.cliente || ia.cliente || 'Por confirmar') + '</span></div>' +
-        '<div class="oc-field">Fecha: <span>' + c.fecha + '</span></div>' +
+      ocHtml = '<div class="oc-info">'+
+        '<div class="oc-field">N° OC: <span>'+(c.numero_oc||ia.numeroOC||'Por confirmar')+'</span></div>'+
+        '<div class="oc-field">Cliente: <span>'+(c.cliente||ia.cliente||'Por confirmar')+'</span></div>'+
+        '<div class="oc-field">Fecha: <span>'+c.fecha+'</span></div>'+
         (c.procesado
           ? '<span class="procesado-badge" style="margin-left:auto">✓ Aplicada</span>'
-          : '<button class="btn-aplicar" onclick="aplicarOC(\'' + c.archivo + '\')">Aplicar al sistema</button>') +
-        '</div>';
+          : '<button class="btn-aplicar" onclick="aplicarOC(\''+esc(c.archivo)+'\')">Aplicar al sistema</button>')+
+      '</div>';
     }
 
-    return '<div class="' + claseCard + '" id="card-' + i + '">' +
-      '<div class="correo-header">' +
-        '<div class="correo-avatar" style="background:' + color + '22;color:' + color + '">' + initial + '</div>' +
-        '<div class="correo-meta">' +
-          '<div class="correo-asunto">' + esc(c.asunto) + '</div>' +
-          '<div class="correo-from">De: ' + esc(c.remitente) + '</div>' +
-        '</div>' +
-        '<div class="correo-fecha">' + c.fecha + '</div>' +
-      '</div>' +
-      '<div class="correo-body">' + esc((c.cuerpo || '').slice(0, 200)) + '...</div>' +
-      '<div class="correo-footer">' +
+    return '<div class="'+claseCard+'">'+
+      '<div class="correo-header">'+
+        '<div class="correo-avatar" style="background:'+color+'22;color:'+color+'">'+initial+'</div>'+
+        '<div class="correo-meta">'+
+          '<div class="correo-asunto">'+esc(c.asunto)+'</div>'+
+          '<div class="correo-from">De: '+esc(c.remitente)+'</div>'+
+        '</div>'+
+        '<div class="correo-fecha">'+esc(c.fecha)+'</div>'+
+      '</div>'+
+      '<div class="correo-body">'+esc((c.cuerpo||'').slice(0,200))+'...</div>'+
+      '<div class="correo-footer">'+
         (c.es_oc
-          ? '<span class="badge badge-oc">✓ OC detectada</span><span class="badge badge-' + (c.confianza||'alta') + '">Confianza: ' + (c.confianza||'alta') + '</span>'
-          : '<span class="badge badge-no-oc">Sin OC</span>') +
-        (c.fuente === 'blob-pdf' ? '<span class="source-tag">📄 PDF · Blob Storage</span>' : '') +
-      '</div>' +
-      iaHtml +
-      ocHtml +
+          ? '<span class="badge badge-oc">✓ OC detectada</span><span class="badge badge-'+(c.confianza||'alta')+'">Confianza: '+(c.confianza||'alta')+'</span>'
+          : '<span class="badge badge-no-oc">Sin OC</span>')+
+        (c.fuente==='blob-pdf'?'<span class="source-tag">📄 PDF · Blob Storage</span>':'')+
+      '</div>'+
+      reporteAmHtml+
+      iaHtml+
+      ocHtml+
     '</div>';
   }
 
-  // ── Actualizar stats y contadores de tabs ─────────────────────────────────
-  function updateStats() {
-    var ocs       = allCorreos.filter(function(c) { return c.es_oc; });
-    var procesadas = ocs.filter(function(c) { return c.procesado; });
+  // ── Marcar Reporte AM en Gestión OC ──────────────────────────────────────
+  async function marcarReporteAM(archivo) {
+    var correo = allCorreos.find(function(c){ return c.archivo===archivo; });
+    if (!correo) return;
 
-    document.getElementById('stat-total').textContent     = allCorreos.length;
-    document.getElementById('stat-oc').textContent        = ocs.length;
-    document.getElementById('stat-pendiente').textContent = ocs.length - procesadas.length;
-    document.getElementById('stat-procesado').textContent = procesadas.length;
+    var btn = document.querySelector('[onclick="marcarReporteAM(\''+archivo+'\')"]');
+    if (btn) { btn.disabled=true; btn.textContent='Marcando...'; }
 
-    // Contadores de tabs de flujo
-    document.getElementById('cnt-todos').textContent     = allCorreos.length;
-    document.getElementById('cnt-reporte').textContent   = allCorreos.filter(function(c){ return c.flujo==='reporte'; }).length;
-    document.getElementById('cnt-ejecutiva').textContent = allCorreos.filter(function(c){ return c.flujo==='ejecutiva'; }).length;
-    document.getElementById('cnt-oc').textContent        = allCorreos.filter(function(c){ return c.flujo==='oc'; }).length;
+    try {
+      // 1) Leer historial de Gestión OC
+      var res = await fetch(API+'/gestionar_oc');
+      if (!res.ok) throw new Error('No se pudo leer Gestión OC');
+      var historial = await res.json();
+
+      var ia = correo.analisisIA || {};
+      var periodo = ia.periodo || '';
+      var clientesReporte = ia.clientesReporte || [];
+      var marcados = 0;
+
+      if (clientesReporte.length === 0) {
+        // Sin lista de clientes extraída por IA — marcar todos del período
+        var delPeriodo = historial.filter(function(h){ return !periodo || h.periodo===periodo; });
+        clientesReporte = delPeriodo.map(function(h){ return h.cliente; });
+      }
+
+      // 2) Marcar reporteAM=true para cada cliente encontrado
+      for (var i=0; i<historial.length; i++) {
+        var h = historial[i];
+        var coincide = clientesReporte.some(function(cl){
+          return cl && h.cliente && (
+            h.cliente.toLowerCase().includes(cl.toLowerCase().split(' ')[0]) ||
+            cl.toLowerCase().includes(h.cliente.toLowerCase().split(' ')[0])
+          );
+        }) || (!periodo || h.periodo===periodo); // Si no hay lista, marcar todos del período
+
+        if (coincide && (!periodo || h.periodo===periodo)) {
+          await fetch(API+'/gestionar_oc', {
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify({key:h.key, reporteAM:true})
+          });
+          marcados++;
+        }
+      }
+
+      // 3) Actualizar estado local
+      correo.amMarcado = true;
+      updateStats();
+      renderCorreos();
+
+      showToast('✓ Reporte AM marcado para '+marcados+' clientes en Gestión OC'+
+        (periodo?' · Período '+periodo:''));
+
+    } catch(e) {
+      if (btn) { btn.disabled=false; btn.textContent='📊 Marcar Reporte AM en Gestión OC'; }
+      showToast('Error al marcar: '+e.message, true);
+    }
   }
 
-  // ── Escanear: intenta Azure Function, cae a demo ─────────────────────────
+  // ── Escanear ──────────────────────────────────────────────────────────────
   async function escanear() {
     var btn = document.getElementById('btn-scan');
-    btn.disabled   = true;
-    btn.textContent = 'Escaneando...';
-
+    btn.disabled=true; btn.textContent='Escaneando...';
     document.getElementById('correos-list').innerHTML =
-      '<div class="scanning">Conectando con Azure Blob Storage<span class="scan-dot">...</span><br><br>' +
-      'GPT-4o analizando PDFs en los 3 contenedores de correos</div>';
-
-    await new Promise(function(r) { setTimeout(r, 2000); });
-
-    allCorreos = [];
-
-    // Intentar leer desde Azure Function real
-    var usoBlobReal = false;
+      '<div class="scanning">Conectando con Azure Blob Storage<span class="scan-dot">...</span><br><br>'+
+      'GPT-4o analizando PDFs en los 3 contenedores</div>';
+    await new Promise(function(r){ setTimeout(r,2000); });
+    allCorreos=[];
+    var usoBlobReal=false;
     try {
-      var url = FUNCTION_PDF_URL + (FUNCTION_KEY ? '?code=' + FUNCTION_KEY : '');
-      var res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      var url = FUNCTION_PDF_URL+(FUNCTION_KEY?'?code='+FUNCTION_KEY:'');
+      var res = await fetch(url,{signal:AbortSignal.timeout(8000)});
       if (res.ok) {
-        var data = await res.json();
+        var data=await res.json();
         if (data.contenedores) {
-          // Mapear respuesta de la Function al formato local
-          Object.entries(data.contenedores).forEach(function(entry) {
-            var nombre = entry[0], cont = entry[1];
-            var flujoMap = {
-              'correos-reporte-interno':   'reporte',
-              'correos-ejecutiva-cliente': 'ejecutiva',
-              'correos-oc-cliente':        'oc'
-            };
-            var flujo = flujoMap[nombre] || 'reporte';
-            (cont.correos || []).forEach(function(c) {
-              var ia = c.analisisIA || {};
+          Object.entries(data.contenedores).forEach(function(entry){
+            var nombre=entry[0], cont=entry[1];
+            var flujoMap={'correos-reporte-interno':'reporte','correos-ejecutiva-cliente':'ejecutiva','correos-oc-cliente':'oc'};
+            var flujo=flujoMap[nombre]||'reporte';
+            (cont.correos||[]).forEach(function(c){
+              var ia=c.analisisIA||{};
               allCorreos.push({
                 archivo:   c.archivo,
                 asunto:    c.archivo.replace('.pdf','').replace(/-/g,' '),
-                remitente: ia.cliente || 'Cliente',
-                fecha:     c.fechaSubida ? c.fechaSubida.slice(0,10) : '',
+                remitente: ia.cliente||'Cliente',
+                fecha:     c.fechaSubida?c.fechaSubida.slice(0,10):'',
                 flujo:     flujo,
-                es_oc:     ia.tieneOC || false,
-                numero_oc: ia.numeroOC || null,
-                cliente:   ia.cliente || null,
-                confianza: ia.confianza || 'media',
+                es_oc:     ia.tieneOC||false,
+                numero_oc: ia.numeroOC||null,
+                cliente:   ia.cliente||null,
+                confianza: ia.confianza||'media',
                 procesado: false,
+                amMarcado: false,
                 fuente:    'blob-pdf',
-                cuerpo:    ia.resumen || '',
-                analisisIA: ia
+                cuerpo:    ia.resumen||'',
+                analisisIA:ia
               });
             });
           });
-          if (allCorreos.length > 0) usoBlobReal = true;
+          if (allCorreos.length>0) usoBlobReal=true;
         }
       }
-    } catch(e) {
-      console.log('Azure Function no disponible, usando demo:', e.message);
-    }
+    } catch(e){ console.log('Usando demo:',e.message); }
 
-    // Si no hay datos reales, usar demo
     if (!usoBlobReal) {
-      Object.values(DEMO_DATA).forEach(function(lista) {
-        lista.forEach(function(c) { allCorreos.push(c); });
+      Object.values(DEMO_DATA).forEach(function(lista){
+        lista.forEach(function(c){ allCorreos.push(Object.assign({amMarcado:false},c)); });
       });
     }
-
     updateStats();
     renderCorreos();
-    btn.disabled    = false;
-    btn.textContent = '⚡ Escanear de nuevo';
+    btn.disabled=false; btn.textContent='⚡ Escanear de nuevo';
   }
 
-  // ── Aplicar OC al sistema ─────────────────────────────────────────────────
+  // ── Aplicar OC ────────────────────────────────────────────────────────────
   async function aplicarOC(archivo) {
-    var correo = allCorreos.find(function(c) { return c.archivo === archivo; });
+    var correo = allCorreos.find(function(c){ return c.archivo===archivo; });
     if (!correo) return;
-
     try {
-      var res = await fetch(API + '/gestionar_oc');
+      var res=await fetch(API+'/gestionar_oc');
       if (res.ok) {
-        var historial = await res.json();
-        var match = historial.find(function(h) {
-          return h.cliente && correo.cliente &&
+        var historial=await res.json();
+        var match=historial.find(function(h){
+          return h.cliente&&correo.cliente&&
             h.cliente.toLowerCase().includes((correo.cliente||'').toLowerCase().split(' ')[0]);
         });
         if (match) {
-          await fetch(API + '/gestionar_oc', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              key: match.key,
-              numeroOC: correo.numero_oc || (correo.analisisIA||{}).numeroOC,
-              fechaOC:  correo.fecha,
-              estado:   'recibida'
-            })
+          await fetch(API+'/gestionar_oc',{
+            method:'POST',headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({key:match.key,numeroOC:correo.numero_oc||(correo.analisisIA||{}).numeroOC,fechaOC:correo.fecha,estado:'recibida'})
           });
-          alert('✓ OC ' + (correo.numero_oc || 'detectada') + ' aplicada a ' + (correo.cliente || match.cliente));
+          showToast('✓ OC '+(correo.numero_oc||'detectada')+' aplicada a '+(correo.cliente||match.cliente));
         }
       }
-    } catch(e) {
-      console.log('Sin conexión al API, marcando localmente');
-    }
-
-    correo.procesado = true;
+    } catch(e){ console.log('Error:',e.message); }
+    correo.procesado=true;
     updateStats();
     renderCorreos();
   }
 
-  function esc(str) {
-    if (!str) return '';
+  function esc(str){
+    if(!str)return'';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 </script>
