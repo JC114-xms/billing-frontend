@@ -7,126 +7,156 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0c10; --surface: #111318; --surface2: #181c23;
-    --border: #232830; --border2: #2e3440;
-    --accent: #3b82f6; --accent2: #1d4ed8;
-    --success: #10b981; --warn: #f59e0b; --danger: #ef4444;
-    --text: #e8eaf0; --muted: #6b7280;
-    --mono: 'DM Mono', monospace; --sans: 'Syne', sans-serif;
+    --bg:#0a0c10;--surface:#111318;--surface2:#181c23;
+    --border:#232830;--border2:#2e3440;
+    --accent:#3b82f6;--accent2:#1d4ed8;
+    --success:#10b981;--warn:#f59e0b;--danger:#ef4444;
+    --text:#e8eaf0;--muted:#6b7280;
+    --mono:'DM Mono',monospace;--sans:'Syne',sans-serif;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
-  body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 40px 40px; opacity: 0.35; pointer-events: none;
-  }
-  .topbar { display: flex; align-items: center; gap: 16px; padding: 20px 32px; border-bottom: 1px solid var(--border); background: var(--surface); }
-  .logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; }
-  .logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 8px; margin-left: auto; }
-  .nav-link { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-family: var(--mono); color: var(--muted); text-decoration: none; border: 1px solid transparent; transition: all 0.15s; }
-  .nav-link:hover { color: var(--text); border-color: var(--border2); }
-  .nav-link.active { color: var(--accent); border-color: var(--accent); background: rgba(59,130,246,0.08); }
-  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
-  .page-title { font-size: 28px; font-weight: 800; letter-spacing: -0.8px; margin-bottom: 4px; }
-  .page-sub { font-size: 13px; color: var(--muted); font-family: var(--mono); margin-bottom: 28px; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;opacity:.35;pointer-events:none;}
+  .topbar{display:flex;align-items:center;gap:16px;padding:20px 32px;border-bottom:1px solid var(--border);background:var(--surface);}
+  .logo{font-size:20px;font-weight:800;letter-spacing:-.5px;}
+  .logo span{color:var(--accent);}
+  .nav-links{display:flex;gap:8px;margin-left:auto;}
+  .nav-link{padding:8px 16px;border-radius:8px;font-size:13px;font-family:var(--mono);color:var(--muted);text-decoration:none;border:1px solid transparent;transition:all .15s;}
+  .nav-link:hover{color:var(--text);border-color:var(--border2);}
+  .nav-link.active{color:var(--accent);border-color:var(--accent);background:rgba(59,130,246,.08);}
+  .container{max-width:1300px;margin:0 auto;padding:32px 24px;}
+  .page-title{font-size:28px;font-weight:800;letter-spacing:-.8px;margin-bottom:4px;}
+  .page-sub{font-size:13px;color:var(--muted);font-family:var(--mono);margin-bottom:28px;}
 
-  .controls { display: flex; gap: 12px; align-items: center; margin-bottom: 24px; flex-wrap: wrap; }
-  .select-periodo { background: var(--surface); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 14px; color: var(--text); font-family: var(--mono); font-size: 13px; outline: none; cursor: pointer; }
-  .filter-btn { padding: 10px 16px; border-radius: 8px; border: 1px solid var(--border2); background: var(--surface); color: var(--muted); font-family: var(--mono); font-size: 12px; cursor: pointer; transition: all 0.15s; letter-spacing: 1px; text-transform: uppercase; }
-  .filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(59,130,246,0.08); }
-  .filter-btn.f-pendiente.active { border-color: var(--warn); color: var(--warn); background: rgba(245,158,11,0.08); }
-  .filter-btn.f-recibida.active { border-color: var(--success); color: var(--success); background: rgba(16,185,129,0.08); }
-  .filter-btn.f-vencida.active { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.08); }
+  /* Controls */
+  .controls{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
+  .select-periodo{background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--text);font-family:var(--mono);font-size:13px;outline:none;cursor:pointer;}
+  .filter-btn{padding:10px 16px;border-radius:8px;border:1px solid var(--border2);background:var(--surface);color:var(--muted);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all .15s;letter-spacing:1px;text-transform:uppercase;}
+  .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,.08);}
+  .filter-btn.f-pendiente.active{border-color:var(--warn);color:var(--warn);background:rgba(245,158,11,.08);}
+  .filter-btn.f-recibida.active{border-color:var(--success);color:var(--success);background:rgba(16,185,129,.08);}
+  .filter-btn.f-vencida.active{border-color:var(--danger);color:var(--danger);background:rgba(239,68,68,.08);}
+  .btn-reset{display:flex;align-items:center;gap:6px;padding:10px 16px;border-radius:8px;border:1px solid rgba(239,68,68,.4);background:rgba(239,68,68,.06);color:var(--danger);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all .2s;letter-spacing:.5px;margin-left:auto;}
+  .btn-reset:hover{background:rgba(239,68,68,.14);border-color:var(--danger);}
 
-  .btn-reset { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 8px; border: 1px solid rgba(239,68,68,0.4); background: rgba(239,68,68,0.06); color: var(--danger); font-family: var(--mono); font-size: 12px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; margin-left: auto; }
-  .btn-reset:hover { background: rgba(239,68,68,0.14); border-color: var(--danger); }
-  .btn-reset:disabled { opacity: 0.4; cursor: not-allowed; }
+  /* Buscador */
+  .search-row{display:flex;gap:10px;align-items:center;margin-bottom:20px;}
+  .search-input{flex:1;background:var(--surface);border:1px solid var(--border2);border-radius:8px;padding:10px 14px 10px 38px;color:var(--text);font-family:var(--mono);font-size:13px;outline:none;transition:border-color .15s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:12px center;}
+  .search-input:focus{border-color:var(--accent);}
+  .search-input::placeholder{color:var(--muted);}
+  .search-count{font-size:11px;font-family:var(--mono);color:var(--muted);white-space:nowrap;}
+  .btn-clear-search{padding:8px 12px;border-radius:6px;border:1px solid var(--border2);background:var(--surface);color:var(--muted);font-family:var(--mono);font-size:11px;cursor:pointer;transition:all .15s;}
+  .btn-clear-search:hover{color:var(--text);border-color:var(--border2);}
 
-  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-  .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; position: relative; overflow: hidden; transition: opacity 0.3s; }
-  .kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-  .kpi.k-total::before { background: var(--accent); }
-  .kpi.k-pendiente::before { background: var(--warn); }
-  .kpi.k-recibida::before { background: var(--success); }
-  .kpi.k-vencida::before { background: var(--danger); }
-  .kpi-label { font-size: 11px; font-family: var(--mono); color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
-  .kpi-value { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
-  .kpi-sub { font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 4px; }
-  .kpi.fading { opacity: 0.3; }
+  /* KPIs */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;position:relative;overflow:hidden;transition:opacity .3s;}
+  .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+  .kpi.k-total::before{background:var(--accent);}
+  .kpi.k-pendiente::before{background:var(--warn);}
+  .kpi.k-recibida::before{background:var(--success);}
+  .kpi.k-vencida::before{background:var(--danger);}
+  .kpi-label{font-size:11px;font-family:var(--mono);color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;}
+  .kpi-value{font-size:28px;font-weight:800;letter-spacing:-1px;}
+  .kpi-sub{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:4px;}
+  .kpi.fading{opacity:.3;}
 
-  .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-  table { width: 100%; border-collapse: collapse; }
-  thead tr { border-bottom: 1px solid var(--border2); }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-family: var(--mono); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: var(--surface2); }
-  td { padding: 14px 16px; font-size: 13px; }
-  .td-cliente { font-weight: 600; font-size: 13px; max-width: 200px; }
-  .td-mono { font-family: var(--mono); font-size: 12px; color: var(--muted); }
-  .td-amount { font-family: var(--mono); font-size: 13px; font-weight: 500; }
-  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-family: var(--mono); letter-spacing: 0.5px; text-transform: uppercase; font-weight: 500; }
-  .badge-pendiente { background: rgba(245,158,11,0.12); color: var(--warn); border: 1px solid rgba(245,158,11,0.25); }
-  .badge-recibida { background: rgba(16,185,129,0.12); color: var(--success); border: 1px solid rgba(16,185,129,0.25); }
-  .badge-vencida { background: rgba(239,68,68,0.12); color: var(--danger); border: 1px solid rgba(239,68,68,0.25); }
-  .badge-cobro { background: rgba(59,130,246,0.12); color: var(--accent); border: 1px solid rgba(59,130,246,0.25); }
-  .dias-ok { color: var(--success); font-family: var(--mono); font-size: 12px; }
-  .dias-warn { color: var(--warn); font-family: var(--mono); font-size: 12px; }
-  .dias-danger { color: var(--danger); font-family: var(--mono); font-size: 12px; font-weight: 600; }
-  .btn-accion { padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border2); background: var(--surface2); color: var(--muted); font-family: var(--mono); font-size: 11px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-  .btn-accion:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-oc:hover { border-color: var(--success); color: var(--success); }
+  /* Tabla */
+  .table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;min-width:1100px;}
+  thead tr{border-bottom:1px solid var(--border2);}
+  th{padding:12px 14px;text-align:left;font-size:10px;font-family:var(--mono);color:var(--muted);letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+  tbody tr{border-bottom:1px solid var(--border);transition:background .15s;}
+  tbody tr:last-child{border-bottom:none;}
+  tbody tr:hover{background:var(--surface2);}
+  td{padding:12px 14px;font-size:13px;vertical-align:middle;}
+  .td-cliente{font-weight:600;font-size:13px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .td-mono{font-family:var(--mono);font-size:11px;color:var(--muted);}
+  .td-amount{font-family:var(--mono);font-size:13px;font-weight:500;}
+
+  /* Badges */
+  .badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-family:var(--mono);letter-spacing:.5px;text-transform:uppercase;font-weight:500;}
+  .badge-pendiente{background:rgba(245,158,11,.12);color:var(--warn);border:1px solid rgba(245,158,11,.25);}
+  .badge-recibida{background:rgba(16,185,129,.12);color:var(--success);border:1px solid rgba(16,185,129,.25);}
+  .badge-vencida{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.25);}
+  .badge-cobro{background:rgba(59,130,246,.12);color:var(--accent);border:1px solid rgba(59,130,246,.25);}
+
+  /* Check reporte AM */
+  .check-am{display:flex;align-items:center;justify-content:center;}
+  .check-am input[type=checkbox]{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:2px solid var(--border2);border-radius:5px;cursor:pointer;transition:all .2s;position:relative;background:var(--surface2);}
+  .check-am input[type=checkbox]:checked{background:var(--success);border-color:var(--success);}
+  .check-am input[type=checkbox]:checked::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:12px;font-weight:700;}
+  .check-am input[type=checkbox]:hover{border-color:var(--success);}
+
+  /* Correo cliente cell */
+  .correo-cliente-cell{font-family:var(--mono);font-size:11px;}
+  .correo-cliente-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:12px;font-size:10px;font-family:var(--mono);background:rgba(139,92,246,.1);color:#a78bfa;border:1px solid rgba(139,92,246,.25);}
+
+  /* Días */
+  .dias-ok{color:var(--success);font-family:var(--mono);font-size:11px;}
+  .dias-warn{color:var(--warn);font-family:var(--mono);font-size:11px;}
+  .dias-danger{color:var(--danger);font-family:var(--mono);font-size:11px;font-weight:600;}
+
+  /* Botones acción */
+  .acciones-cell{display:flex;gap:5px;flex-wrap:wrap;}
+  .btn-accion{padding:5px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--surface2);color:var(--muted);font-family:var(--mono);font-size:10px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+  .btn-accion:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-oc:hover{border-color:var(--success);color:var(--success);}
+  .btn-correo-cliente:hover{border-color:#a78bfa;color:#a78bfa;}
+
+  /* Highlight búsqueda */
+  .highlight{background:rgba(59,130,246,.25);border-radius:2px;padding:0 1px;}
 
   /* Modales */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; }
-  .modal-overlay.show { display: flex; }
-  .modal { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 32px; width: 100%; max-width: 480px; position: relative; }
-  .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-  .modal-sub { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-bottom: 24px; }
-  .form-group { margin-bottom: 16px; }
-  .form-label { display: block; font-size: 11px; font-family: var(--mono); color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-  .form-input { width: 100%; background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: var(--mono); font-size: 13px; outline: none; transition: border-color 0.15s; }
-  .form-input:focus { border-color: var(--accent); }
-  .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
-  .btn-primary { flex: 1; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; }
-  .btn-primary:hover { background: var(--accent2); }
-  .btn-secondary { padding: 12px 20px; background: transparent; color: var(--muted); border: 1px solid var(--border2); border-radius: 8px; font-family: var(--sans); font-size: 14px; cursor: pointer; }
-  .btn-secondary:hover { color: var(--text); border-color: var(--text); }
-  .btn-success { flex: 1; padding: 12px; background: var(--success); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; }
-  .btn-success:hover { opacity: 0.88; }
-  .btn-danger-confirm { flex: 1; padding: 12px; background: var(--danger); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 700; cursor: pointer; }
-  .btn-danger-confirm:hover { opacity: 0.85; }
-  .btn-danger-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;align-items:center;justify-content:center;}
+  .modal-overlay.show{display:flex;}
+  .modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:32px;width:100%;max-width:480px;position:relative;}
+  .modal-title{font-size:18px;font-weight:700;margin-bottom:6px;}
+  .modal-sub{font-size:12px;color:var(--muted);font-family:var(--mono);margin-bottom:24px;}
+  .form-group{margin-bottom:16px;}
+  .form-label{display:block;font-size:11px;font-family:var(--mono);color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+  .form-input{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text);font-family:var(--mono);font-size:13px;outline:none;transition:border-color .15s;}
+  .form-input:focus{border-color:var(--accent);}
+  .modal-actions{display:flex;gap:12px;margin-top:24px;}
+  .btn-primary{flex:1;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;}
+  .btn-primary:hover{background:var(--accent2);}
+  .btn-secondary{padding:12px 20px;background:transparent;color:var(--muted);border:1px solid var(--border2);border-radius:8px;font-family:var(--sans);font-size:14px;cursor:pointer;}
+  .btn-secondary:hover{color:var(--text);border-color:var(--text);}
+  .btn-success{flex:1;padding:12px;background:var(--success);color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;}
+  .btn-success:hover{opacity:.88;}
+  .btn-purple{flex:1;padding:12px;background:#7c3aed;color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;}
+  .btn-purple:hover{opacity:.88;}
+  .btn-danger-confirm{flex:1;padding:12px;background:var(--danger);color:#fff;border:none;border-radius:8px;font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;}
+  .btn-danger-confirm:hover{opacity:.85;}
+  .btn-danger-confirm:disabled{opacity:.4;cursor:not-allowed;}
 
   /* Modal reset */
-  .modal-reset { border-color: rgba(239,68,68,0.5); overflow: hidden; }
-  .modal-reset::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--danger), var(--warn)); }
-  .reset-icon { font-size: 36px; margin-bottom: 12px; display: block; }
-  .reset-title { color: var(--danger); }
-  .reset-periodo-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 8px; padding: 10px 14px; font-family: var(--mono); font-size: 13px; color: var(--warn); margin: 12px 0; }
-  .reset-lista { font-size: 12px; font-family: var(--mono); color: var(--muted); line-height: 2.2; margin: 10px 0 6px; list-style: none; }
-  .reset-lista li::before { content: '✗ '; color: var(--danger); }
-  .reset-advertencia { font-size: 11px; font-family: var(--mono); color: var(--danger); margin-top: 8px; }
+  .modal-reset{border-color:rgba(239,68,68,.5);overflow:hidden;}
+  .modal-reset::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--danger),var(--warn));}
+  .reset-icon{font-size:36px;margin-bottom:12px;display:block;}
+  .reset-title{color:var(--danger);}
+  .reset-periodo-box{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;padding:10px 14px;font-family:var(--mono);font-size:13px;color:var(--warn);margin:12px 0;}
+  .reset-lista{font-size:12px;font-family:var(--mono);color:var(--muted);line-height:2.2;margin:10px 0 6px;list-style:none;}
+  .reset-lista li::before{content:'✗ ';color:var(--danger);}
+  .reset-advertencia{font-size:11px;font-family:var(--mono);color:var(--danger);margin-top:8px;}
 
-  /* Progreso reset */
-  .reset-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; flex-direction: column; gap: 18px; }
-  .reset-overlay.show { display: flex; }
-  .spinner { width: 44px; height: 44px; border: 3px solid var(--border2); border-top-color: var(--danger); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .reset-prog-title { font-size: 15px; font-family: var(--mono); color: var(--text); }
-  .reset-prog-step { font-size: 12px; font-family: var(--mono); color: var(--muted); min-height: 20px; }
-  .reset-prog-bar-wrap { width: 280px; height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; }
-  .reset-prog-bar { height: 3px; background: var(--danger); border-radius: 2px; transition: width 0.4s; }
+  /* Reset overlay */
+  .reset-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:18px;}
+  .reset-overlay.show{display:flex;}
+  .spinner{width:44px;height:44px;border:3px solid var(--border2);border-top-color:var(--danger);border-radius:50%;animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .reset-prog-title{font-size:15px;font-family:var(--mono);color:var(--text);}
+  .reset-prog-step{font-size:12px;font-family:var(--mono);color:var(--muted);min-height:20px;}
+  .reset-prog-bar-wrap{width:280px;height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
+  .reset-prog-bar{height:3px;background:var(--danger);border-radius:2px;transition:width .4s;}
 
   /* Toast */
-  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--success); border-radius: 10px; padding: 14px 20px; font-size: 13px; font-family: var(--mono); color: var(--success); z-index: 300; transform: translateY(80px); opacity: 0; transition: all 0.3s; max-width: 400px; line-height: 1.5; }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast.error { border-color: var(--danger); color: var(--danger); }
+  .toast{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--success);border-radius:10px;padding:14px 20px;font-size:13px;font-family:var(--mono);color:var(--success);z-index:300;transform:translateY(80px);opacity:0;transition:all .3s;max-width:400px;line-height:1.5;}
+  .toast.show{transform:translateY(0);opacity:1;}
+  .toast.error{border-color:var(--danger);color:var(--danger);}
 
-  .loading { text-align: center; padding: 60px; color: var(--muted); font-family: var(--mono); font-size: 13px; }
-  .empty { text-align: center; padding: 60px; color: var(--muted); font-family: var(--mono); font-size: 13px; }
+  .loading{text-align:center;padding:60px;color:var(--muted);font-family:var(--mono);font-size:13px;}
+  .empty{text-align:center;padding:60px;color:var(--muted);font-family:var(--mono);font-size:13px;}
 </style>
 </head>
 <body>
@@ -136,7 +166,7 @@
   <div class="modal modal-reset">
     <span class="reset-icon">⚠️</span>
     <div class="modal-title reset-title">Resetear período</div>
-    <div class="modal-sub">Esto eliminará permanentemente todos los datos del período del Blob Storage y reiniciará el proceso desde cero.</div>
+    <div class="modal-sub">Eliminará permanentemente todos los datos del período del Blob Storage.</div>
     <div class="reset-periodo-box" id="reset-periodo-box">Período: —</div>
     <ul class="reset-lista">
       <li>Registros de gestión OC del período</li>
@@ -144,28 +174,26 @@
       <li>OCs marcadas como recibidas</li>
       <li>Snapshot del período en Blob Storage</li>
     </ul>
-    <div class="reset-advertencia">⚠ Esta acción borra los datos reales del Blob Storage. No se puede deshacer.</div>
+    <div class="reset-advertencia">⚠ Esta acción no se puede deshacer.</div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal('modal-reset')">Cancelar</button>
-      <button class="btn-danger-confirm" id="btn-confirmar-reset" onclick="ejecutarReset()">🗑 Sí, resetear período</button>
+      <button class="btn-danger-confirm" id="btn-confirmar-reset" onclick="ejecutarReset()">🗑 Sí, resetear</button>
     </div>
   </div>
 </div>
 
-<!-- Pantalla progreso -->
+<!-- Progreso reset -->
 <div class="reset-overlay" id="reset-overlay">
   <div class="spinner"></div>
   <div class="reset-prog-title">Reseteando período en Blob Storage...</div>
   <div class="reset-prog-step" id="reset-step-txt">Iniciando...</div>
-  <div class="reset-prog-bar-wrap">
-    <div class="reset-prog-bar" id="reset-prog-bar" style="width:0%"></div>
-  </div>
+  <div class="reset-prog-bar-wrap"><div class="reset-prog-bar" id="reset-prog-bar" style="width:0%"></div></div>
 </div>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- Modales estándar -->
+<!-- Modal correo cobro -->
 <div class="modal-overlay" id="modal-cobro">
   <div class="modal">
     <div class="modal-title">Registrar correo de cobro</div>
@@ -181,6 +209,7 @@
   </div>
 </div>
 
+<!-- Modal OC recibida -->
 <div class="modal-overlay" id="modal-oc">
   <div class="modal">
     <div class="modal-title">Registrar OC recibida</div>
@@ -195,11 +224,32 @@
     </div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal('modal-oc')">Cancelar</button>
-      <button class="btn-success" onclick="guardarOC()">Marcar como recibida</button>
+      <button class="btn-success" onclick="guardarOC()">✓ Marcar como recibida</button>
     </div>
   </div>
 </div>
 
+<!-- Modal correo cliente -->
+<div class="modal-overlay" id="modal-correo-cliente">
+  <div class="modal">
+    <div class="modal-title">Registrar respuesta del cliente</div>
+    <div class="modal-sub" id="modal-correo-cliente-sub">—</div>
+    <div class="form-group">
+      <label class="form-label">Fecha de respuesta</label>
+      <input type="date" class="form-input" id="input-fecha-correo-cliente" />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Observación (opcional)</label>
+      <input type="text" class="form-input" id="input-obs-correo-cliente" placeholder="Ej: Envió OC adjunta, esperando aprobación..." />
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal('modal-correo-cliente')">Cancelar</button>
+      <button class="btn-purple" onclick="guardarCorreoCliente()">📧 Registrar respuesta</button>
+    </div>
+  </div>
+</div>
+
+<!-- App -->
 <div class="topbar">
   <div class="logo">Alertas <span>Amigables</span></div>
   <nav class="nav-links">
@@ -215,52 +265,53 @@
   <div class="page-title">Gestión de órdenes de compra</div>
   <div class="page-sub">// seguimiento de cobros y recepción de OC por cliente</div>
 
+  <!-- Controles -->
   <div class="controls">
     <select class="select-periodo" id="select-periodo" onchange="loadData()">
       <option value="">Todos los períodos</option>
     </select>
-    <button class="filter-btn active" onclick="setFilter('todos', this)">Todos</button>
-    <button class="filter-btn f-pendiente" onclick="setFilter('pendiente', this)">Pendientes</button>
-    <button class="filter-btn f-recibida" onclick="setFilter('recibida', this)">Recibidas</button>
-    <button class="filter-btn f-vencida" onclick="setFilter('vencida', this)">Vencidas</button>
-    <button class="btn-reset" id="btn-reset" onclick="abrirModalReset()">
-      🔄 Resetear período
-    </button>
+    <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
+    <button class="filter-btn f-pendiente" onclick="setFilter('pendiente',this)">Pendientes</button>
+    <button class="filter-btn f-recibida" onclick="setFilter('recibida',this)">Recibidas</button>
+    <button class="filter-btn f-vencida" onclick="setFilter('vencida',this)">Vencidas</button>
+    <button class="btn-reset" onclick="abrirModalReset()">🔄 Resetear período</button>
   </div>
 
+  <!-- Buscador -->
+  <div class="search-row">
+    <input class="search-input" type="text" id="search-input"
+      placeholder="Buscar cliente..." oninput="onSearch()" />
+    <span class="search-count" id="search-count"></span>
+    <button class="btn-clear-search" onclick="clearSearch()">✕ Limpiar</button>
+  </div>
+
+  <!-- KPIs -->
   <div class="kpis">
-    <div class="kpi k-total">
-      <div class="kpi-label">Total clientes</div>
-      <div class="kpi-value" id="kpi-total">—</div>
-      <div class="kpi-sub" id="kpi-monto">USD 0</div>
-    </div>
-    <div class="kpi k-pendiente">
-      <div class="kpi-label">Pendientes OC</div>
-      <div class="kpi-value" id="kpi-pendiente">—</div>
-      <div class="kpi-sub" id="kpi-monto-pendiente">USD 0</div>
-    </div>
-    <div class="kpi k-recibida">
-      <div class="kpi-label">OC recibidas</div>
-      <div class="kpi-value" id="kpi-recibida">—</div>
-      <div class="kpi-sub" id="kpi-monto-recibida">USD 0</div>
-    </div>
-    <div class="kpi k-vencida">
-      <div class="kpi-label">Vencidas</div>
-      <div class="kpi-value" id="kpi-vencida">—</div>
-      <div class="kpi-sub" id="kpi-monto-vencida">USD 0</div>
-    </div>
+    <div class="kpi k-total"><div class="kpi-label">Total clientes</div><div class="kpi-value" id="kpi-total">—</div><div class="kpi-sub" id="kpi-monto">USD 0</div></div>
+    <div class="kpi k-pendiente"><div class="kpi-label">Pendientes OC</div><div class="kpi-value" id="kpi-pendiente">—</div><div class="kpi-sub" id="kpi-monto-pendiente">USD 0</div></div>
+    <div class="kpi k-recibida"><div class="kpi-label">OC recibidas</div><div class="kpi-value" id="kpi-recibida">—</div><div class="kpi-sub" id="kpi-monto-recibida">USD 0</div></div>
+    <div class="kpi k-vencida"><div class="kpi-label">Vencidas</div><div class="kpi-value" id="kpi-vencida">—</div><div class="kpi-sub" id="kpi-monto-vencida">USD 0</div></div>
   </div>
 
+  <!-- Tabla -->
   <div class="table-wrap">
     <table>
       <thead>
         <tr>
-          <th>Cliente</th><th>Período</th><th>Monto USD</th><th>Estado</th>
-          <th>Correo cobro</th><th>Días restantes</th><th>OC</th><th>Acciones</th>
+          <th>Cliente</th>
+          <th>Período</th>
+          <th>Monto USD</th>
+          <th title="¿Se envió el reporte interno a la AM?">Reporte AM</th>
+          <th>Correo Cobro</th>
+          <th>Correo Cliente</th>
+          <th>Estado</th>
+          <th>Días</th>
+          <th>OC</th>
+          <th>Acciones</th>
         </tr>
       </thead>
       <tbody id="tabla-body">
-        <tr><td colspan="8" class="loading">Cargando datos...</td></tr>
+        <tr><td colspan="10" class="loading">Cargando datos...</td></tr>
       </tbody>
     </table>
   </div>
@@ -268,9 +319,10 @@
 
 <script>
   var API = 'https://billing-fn-node.azurewebsites.net/api';
-  var allData      = [];
+  var allData       = [];
   var currentFilter = 'todos';
-  var currentKey   = null;
+  var currentSearch = '';
+  var currentKey    = null;
   var periodoAReset = null;
 
   // ── Helpers ───────────────────────────────────────────────────────────────
@@ -287,8 +339,16 @@
     return 'USD ' + (n||0).toLocaleString('es-CL', {minimumFractionDigits:0, maximumFractionDigits:0});
   }
   function labelPeriodo(p) {
-    var map = {'2026-05':'Mayo 2026','2026-06':'Junio 2026','2026-04':'Abril 2026','2026-03':'Marzo 2026','2026-02':'Febrero 2026','2026-01':'Enero 2026'};
-    return map[p] || p;
+    var m = {'2026-05':'Mayo 2026','2026-06':'Junio 2026','2026-04':'Abril 2026','2026-03':'Marzo 2026','2026-02':'Febrero 2026','2026-01':'Enero 2026'};
+    return m[p] || p;
+  }
+  function esc(s) {
+    return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function highlightText(text, query) {
+    if (!query) return esc(text);
+    var re = new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+    return esc(text).replace(re, '<span class="highlight">$1</span>');
   }
 
   // ── Toast ─────────────────────────────────────────────────────────────────
@@ -299,28 +359,38 @@
     setTimeout(function(){ t.className = 'toast' + (esError ? ' error' : ''); }, 5000);
   }
 
+  // ── Buscador ──────────────────────────────────────────────────────────────
+  function onSearch() {
+    currentSearch = document.getElementById('search-input').value.trim().toLowerCase();
+    renderTable();
+  }
+  function clearSearch() {
+    document.getElementById('search-input').value = '';
+    currentSearch = '';
+    renderTable();
+  }
+
   // ── Cargar datos ──────────────────────────────────────────────────────────
   async function loadData() {
     var periodo = document.getElementById('select-periodo').value;
     try {
-      var url = API + '/gestionar_oc' + (periodo ? '?periodo=' + periodo : '');
-      var res = await fetch(url);
+      var res = await fetch(API + '/gestionar_oc' + (periodo ? '?periodo='+periodo : ''));
       allData = await res.json();
       populatePeriodos();
       renderTable();
     } catch(e) {
       document.getElementById('tabla-body').innerHTML =
-        '<tr><td colspan="8" class="empty">Error: ' + e.message + '</td></tr>';
+        '<tr><td colspan="10" class="empty">Error: ' + e.message + '</td></tr>';
     }
   }
 
   function populatePeriodos() {
-    var sel     = document.getElementById('select-periodo');
-    var current = sel.value;
+    var sel = document.getElementById('select-periodo');
+    var cur = sel.value;
     var periodos = [...new Set(allData.map(function(r){ return r.periodo; }))].sort().reverse();
     sel.innerHTML = '<option value="">Todos los períodos</option>' +
       periodos.map(function(p){
-        return '<option value="'+p+'"'+(p===current?' selected':'')+'>'+labelPeriodo(p)+'</option>';
+        return '<option value="'+p+'"'+(p===cur?' selected':'')+'>'+labelPeriodo(p)+'</option>';
       }).join('');
   }
 
@@ -333,15 +403,22 @@
 
   // ── Render tabla ──────────────────────────────────────────────────────────
   function renderTable() {
-    var filtered = allData.filter(function(r){
+    // Filtrar por estado
+    var byEstado = allData.filter(function(r){
       if (currentFilter === 'todos') return true;
       return getEstadoEfectivo(r) === currentFilter;
     });
 
+    // Filtrar por búsqueda
+    var filtered = byEstado.filter(function(r){
+      if (!currentSearch) return true;
+      return r.cliente.toLowerCase().includes(currentSearch);
+    });
+
+    // KPIs (sobre todos los datos, no filtrados)
     var pendientes = allData.filter(function(r){ return getEstadoEfectivo(r)==='pendiente'; });
     var recibidas  = allData.filter(function(r){ return getEstadoEfectivo(r)==='recibida'; });
     var vencidas   = allData.filter(function(r){ return getEstadoEfectivo(r)==='vencida'; });
-
     document.getElementById('kpi-total').textContent     = allData.length;
     document.getElementById('kpi-monto').textContent     = fmtUSD(allData.reduce(function(s,r){ return s+(r.total||0); },0));
     document.getElementById('kpi-pendiente').textContent = pendientes.length;
@@ -351,160 +428,179 @@
     document.getElementById('kpi-vencida').textContent   = vencidas.length;
     document.getElementById('kpi-monto-vencida').textContent   = fmtUSD(vencidas.reduce(function(s,r){ return s+(r.total||0); },0));
 
+    // Contador búsqueda
+    var countEl = document.getElementById('search-count');
+    if (currentSearch) {
+      countEl.textContent = filtered.length + ' de ' + byEstado.length + ' clientes';
+    } else {
+      countEl.textContent = byEstado.length + ' clientes';
+    }
+
     if (filtered.length === 0) {
       document.getElementById('tabla-body').innerHTML =
-        '<tr><td colspan="8" class="empty">No hay registros</td></tr>';
+        '<tr><td colspan="10" class="empty">' +
+        (currentSearch ? 'No se encontró "' + esc(currentSearch) + '"' : 'No hay registros') +
+        '</td></tr>';
       return;
     }
 
     document.getElementById('tabla-body').innerHTML = filtered.map(function(r){
       var estado = getEstadoEfectivo(r);
       var dias   = getDiasRestantes(r.periodo);
-      var diasHtml = estado === 'recibida' ? '<span class="dias-ok">—</span>'
-        : dias < 0   ? '<span class="dias-danger">Vencido ' + Math.abs(dias) + 'd</span>'
-        : dias <= 9  ? '<span class="dias-danger">' + dias + ' días</span>'
-        : dias <= 15 ? '<span class="dias-warn">' + dias + ' días</span>'
-        :               '<span class="dias-ok">' + dias + ' días</span>';
-      var bc = estado==='recibida' ? 'badge-recibida' : estado==='vencida' ? 'badge-vencida' : 'badge-pendiente';
-      var bt = estado==='recibida' ? 'Recibida' : estado==='vencida' ? 'Vencida' : 'Pendiente';
+
+      // Días restantes
+      var diasHtml = estado === 'recibida'
+        ? '<span class="dias-ok">—</span>'
+        : dias < 0   ? '<span class="dias-danger">Vencido '+Math.abs(dias)+'d</span>'
+        : dias <= 9  ? '<span class="dias-danger">'+dias+' días</span>'
+        : dias <= 15 ? '<span class="dias-warn">'+dias+' días</span>'
+        :               '<span class="dias-ok">'+dias+' días</span>';
+
+      // Badge estado
+      var bc = estado==='recibida'?'badge-recibida':estado==='vencida'?'badge-vencida':'badge-pendiente';
+      var bt = estado==='recibida'?'Recibida':estado==='vencida'?'Vencida':'Pendiente';
+
+      // Correo cobro
       var cobroHtml = r.fechaCobro
-        ? '<span class="badge badge-cobro">'+r.fechaCobro+'</span>'
+        ? '<span class="badge badge-cobro">'+esc(r.fechaCobro)+'</span>'
         : '<span class="td-mono">Sin registrar</span>';
+
+      // Correo cliente
+      var correoClienteHtml = r.fechaCorreoCliente
+        ? '<span class="correo-cliente-badge">📧 '+esc(r.fechaCorreoCliente)+'</span>'
+          + (r.obsCorreoCliente ? '<div style="font-size:10px;color:var(--muted);margin-top:3px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="'+esc(r.obsCorreoCliente)+'">'+esc(r.obsCorreoCliente)+'</div>' : '')
+        : '<span class="td-mono">Sin respuesta</span>';
+
+      // OC
       var ocHtml = r.numeroOC
-        ? '<span class="td-mono" style="color:var(--success)">'+r.numeroOC+'</span>'
+        ? '<span class="td-mono" style="color:var(--success)">'+esc(r.numeroOC)+'</span>'
         : '<span class="td-mono">—</span>';
-      var acciones = estado !== 'recibida'
-        ? '<button class="btn-accion btn-cobro" onclick="abrirModalCobro(\''+r.key+'\',\''+r.cliente.replace(/'/g,"\\'")+'\')">'+(r.fechaCobro?'Editar cobro':'Registrar cobro')+'</button>'+
-          '<button class="btn-accion btn-oc" onclick="abrirModalOC(\''+r.key+'\',\''+r.cliente.replace(/'/g,"\\'")+'\')">Marcar OC</button>'
-        : '';
+
+      // Check reporte AM
+      var checkedAM = r.reporteAM ? 'checked' : '';
+      var checkAM = '<div class="check-am"><input type="checkbox" '+checkedAM+
+        ' onchange="toggleReporteAM(\''+r.key+'\')" title="Marcar si se envió reporte a la AM"></div>';
+
+      // Acciones
+      var keyEsc = r.key.replace(/'/g,"\\'");
+      var clienteEsc = r.cliente.replace(/'/g,"\\'");
+      var acciones = '';
+      if (estado !== 'recibida') {
+        acciones +=
+          '<button class="btn-accion btn-cobro" onclick="abrirModalCobro(\''+keyEsc+'\',\''+clienteEsc+'\')">'
+          +(r.fechaCobro?'Editar cobro':'Registrar cobro')+'</button>'+
+          '<button class="btn-accion btn-correo-cliente" onclick="abrirModalCorreoCliente(\''+keyEsc+'\',\''+clienteEsc+'\')">'
+          +(r.fechaCorreoCliente?'Editar resp.':'Correo cliente')+'</button>'+
+          '<button class="btn-accion btn-oc" onclick="abrirModalOC(\''+keyEsc+'\',\''+clienteEsc+'\')">Marcar OC</button>';
+      }
+
       return '<tr>'+
-        '<td class="td-cliente">'+r.cliente+'</td>'+
-        '<td class="td-mono">'+r.periodo+'</td>'+
+        '<td class="td-cliente" title="'+esc(r.cliente)+'">'+highlightText(r.cliente, currentSearch)+'</td>'+
+        '<td class="td-mono">'+esc(r.periodo)+'</td>'+
         '<td class="td-amount">$'+(r.total||0).toLocaleString('es-CL',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td>'+
-        '<td><span class="badge '+bc+'">'+bt+'</span></td>'+
+        '<td>'+checkAM+'</td>'+
         '<td>'+cobroHtml+'</td>'+
+        '<td class="correo-cliente-cell">'+correoClienteHtml+'</td>'+
+        '<td><span class="badge '+bc+'">'+bt+'</span></td>'+
         '<td>'+diasHtml+'</td>'+
         '<td>'+ocHtml+'</td>'+
-        '<td style="display:flex;gap:6px">'+acciones+'</td>'+
+        '<td><div class="acciones-cell">'+acciones+'</div></td>'+
       '</tr>';
     }).join('');
+  }
+
+  // ── Toggle Reporte AM ─────────────────────────────────────────────────────
+  async function toggleReporteAM(key) {
+    var r = allData.find(function(x){ return x.key === key; });
+    if (!r) return;
+    var nuevoValor = !r.reporteAM;
+    r.reporteAM = nuevoValor; // Actualizar local inmediatamente
+    try {
+      await fetch(API + '/gestionar_oc', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({key: key, reporteAM: nuevoValor})
+      });
+      showToast(nuevoValor
+        ? '✓ Reporte AM marcado para ' + r.cliente
+        : '— Reporte AM desmarcado para ' + r.cliente
+      );
+    } catch(e) {
+      r.reporteAM = !nuevoValor; // Revertir si falla
+      showToast('Error al guardar: ' + e.message, true);
+    }
   }
 
   // ── Modal reset ───────────────────────────────────────────────────────────
   function abrirModalReset() {
     var sel = document.getElementById('select-periodo');
     periodoAReset = sel.value;
-
     if (!periodoAReset) {
-      // Tomar el período más reciente si no hay selección
       var periodos = [...new Set(allData.map(function(r){ return r.periodo; }))].sort().reverse();
       if (periodos.length === 0) { showToast('No hay datos para resetear', true); return; }
       periodoAReset = periodos[0];
     }
-
     document.getElementById('reset-periodo-box').textContent =
       '⚡ ' + labelPeriodo(periodoAReset) + ' (' + periodoAReset + ')';
     document.getElementById('modal-reset').classList.add('show');
   }
 
-  // ── Ejecutar reset real contra Blob Storage ───────────────────────────────
   async function ejecutarReset() {
     var btnConf = document.getElementById('btn-confirmar-reset');
     btnConf.disabled = true;
     closeModal('modal-reset');
-
     var overlay = document.getElementById('reset-overlay');
     var stepTxt = document.getElementById('reset-step-txt');
     var bar     = document.getElementById('reset-prog-bar');
     overlay.classList.add('show');
-
-    // Pasos visuales con progreso
     var pasos = [
-      { txt: 'Conectando con Azure Blob Storage...', pct: 10, ms: 500 },
-      { txt: 'Leyendo historial.json...', pct: 25, ms: 600 },
-      { txt: 'Eliminando registros del período ' + periodoAReset + '...', pct: 50, ms: 800 },
-      { txt: 'Borrando periodo_' + periodoAReset + '.json del Blob Storage...', pct: 75, ms: 700 },
-      { txt: 'Guardando historial actualizado...', pct: 90, ms: 600 },
+      {txt:'Conectando con Azure Blob Storage...',pct:10,ms:500},
+      {txt:'Leyendo historial.json...',pct:25,ms:600},
+      {txt:'Eliminando registros del período '+periodoAReset+'...',pct:50,ms:800},
+      {txt:'Borrando periodo_'+periodoAReset+'.json...',pct:75,ms:700},
+      {txt:'Guardando historial actualizado...',pct:90,ms:600},
     ];
-
-    for (var i = 0; i < pasos.length; i++) {
+    for (var i=0;i<pasos.length;i++) {
       stepTxt.textContent = pasos[i].txt;
-      bar.style.width     = pasos[i].pct + '%';
+      bar.style.width = pasos[i].pct+'%';
       await new Promise(function(r){ setTimeout(r, pasos[i].ms); });
     }
-
-    // ── Llamada real al API con método DELETE ─────────────────────────────
-    var resetOk      = false;
-    var resetMsg     = '';
-    var eliminados   = 0;
-
+    var resetOk=false, resetMsg='', eliminados=0;
     try {
-      var res = await fetch(API + '/gestionar_oc?periodo=' + periodoAReset, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' }
-      });
-
+      var res = await fetch(API+'/gestionar_oc?periodo='+periodoAReset, {method:'DELETE',headers:{'Content-Type':'application/json'}});
       if (res.ok) {
-        var data   = await res.json();
-        resetOk    = data.ok === true;
-        eliminados = data.registrosEliminados || 0;
-        resetMsg   = data.mensaje || '';
-      } else {
-        var errText = await res.text();
-        throw new Error('HTTP ' + res.status + ': ' + errText);
-      }
-    } catch(e) {
-      console.error('Error en reset:', e.message);
-      resetOk  = false;
-      resetMsg = e.message;
-    }
-
-    // Completar barra
-    stepTxt.textContent = resetOk ? 'Completado ✓' : 'Error: ' + resetMsg;
-    bar.style.width     = '100%';
+        var data=await res.json(); resetOk=data.ok===true; eliminados=data.registrosEliminados||0; resetMsg=data.mensaje||'';
+      } else { throw new Error('HTTP '+res.status); }
+    } catch(e) { resetOk=false; resetMsg=e.message; }
+    stepTxt.textContent = resetOk ? 'Completado ✓' : 'Error: '+resetMsg;
+    bar.style.width='100%';
     bar.style.background = resetOk ? 'var(--success)' : 'var(--danger)';
-    await new Promise(function(r){ setTimeout(r, 600); });
-
+    await new Promise(function(r){ setTimeout(r,600); });
     overlay.classList.remove('show');
-    bar.style.background = 'var(--danger)';
-    btnConf.disabled = false;
-
+    bar.style.background='var(--danger)';
+    btnConf.disabled=false;
     if (resetOk) {
-      // Limpiar datos locales del período
-      allData = allData.filter(function(r){ return r.periodo !== periodoAReset; });
+      allData=allData.filter(function(r){ return r.periodo!==periodoAReset; });
       renderTable();
-
-      // Fade en KPIs
       document.querySelectorAll('.kpi').forEach(function(k){ k.classList.add('fading'); });
-      setTimeout(function(){
-        document.querySelectorAll('.kpi').forEach(function(k){ k.classList.remove('fading'); });
-      }, 700);
-
-      showToast(
-        '✓ ' + labelPeriodo(periodoAReset) + ' reseteado correctamente.<br>' +
-        eliminados + ' registros eliminados del Blob Storage.<br>' +
-        'Ahora puedes cargar el Excel para reiniciar el proceso.'
-      );
-
-      // Limpiar selector y recargar
-      document.getElementById('select-periodo').value = '';
-      setTimeout(function(){ loadData(); }, 1500);
-
+      setTimeout(function(){ document.querySelectorAll('.kpi').forEach(function(k){ k.classList.remove('fading'); }); },700);
+      showToast('✓ '+labelPeriodo(periodoAReset)+' reseteado.<br>'+eliminados+' registros eliminados.');
+      document.getElementById('select-periodo').value='';
+      setTimeout(function(){ loadData(); },1500);
     } else {
-      showToast('❌ Error al resetear: ' + resetMsg + '<br>Verifica los permisos del SAS Token.', true);
+      showToast('❌ Error al resetear: '+resetMsg, true);
     }
-
-    periodoAReset = null;
+    periodoAReset=null;
   }
 
-  // ── Modales estándar ──────────────────────────────────────────────────────
+  // ── Modales ───────────────────────────────────────────────────────────────
   function abrirModalCobro(key, cliente) {
     currentKey = key;
     document.getElementById('modal-cobro-sub').textContent = cliente;
-    var r = allData.find(function(x){ return x.key === key; });
-    document.getElementById('input-fecha-cobro').value = r && r.fechaCobro ? r.fechaCobro : new Date().toISOString().slice(0,10);
+    var r = allData.find(function(x){ return x.key===key; });
+    document.getElementById('input-fecha-cobro').value = r&&r.fechaCobro ? r.fechaCobro : new Date().toISOString().slice(0,10);
     document.getElementById('modal-cobro').classList.add('show');
   }
+
   function abrirModalOC(key, cliente) {
     currentKey = key;
     document.getElementById('modal-oc-sub').textContent = cliente;
@@ -512,41 +608,53 @@
     document.getElementById('input-fecha-oc').value  = new Date().toISOString().slice(0,10);
     document.getElementById('modal-oc').classList.add('show');
   }
+
+  function abrirModalCorreoCliente(key, cliente) {
+    currentKey = key;
+    document.getElementById('modal-correo-cliente-sub').textContent = cliente;
+    var r = allData.find(function(x){ return x.key===key; });
+    document.getElementById('input-fecha-correo-cliente').value = r&&r.fechaCorreoCliente ? r.fechaCorreoCliente : new Date().toISOString().slice(0,10);
+    document.getElementById('input-obs-correo-cliente').value = r&&r.obsCorreoCliente ? r.obsCorreoCliente : '';
+    document.getElementById('modal-correo-cliente').classList.add('show');
+  }
+
   function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
   async function guardarCobro() {
     var fecha = document.getElementById('input-fecha-cobro').value;
     if (!fecha) return;
     try {
-      await fetch(API + '/gestionar_oc', {
-        method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({key:currentKey, fechaCobro:fecha, estado:'pendiente'})
-      });
-      closeModal('modal-cobro');
-      await loadData();
-    } catch(e) { alert('Error: ' + e.message); }
+      await fetch(API+'/gestionar_oc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:currentKey,fechaCobro:fecha,estado:'pendiente'})});
+      closeModal('modal-cobro'); await loadData();
+    } catch(e){ alert('Error: '+e.message); }
   }
 
   async function guardarOC() {
     var numero = document.getElementById('input-numero-oc').value.trim();
     var fecha  = document.getElementById('input-fecha-oc').value;
-    if (!numero || !fecha) { alert('Completa todos los campos'); return; }
+    if (!numero||!fecha){ alert('Completa todos los campos'); return; }
     try {
-      await fetch(API + '/gestionar_oc', {
-        method: 'POST', headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({key:currentKey, numeroOC:numero, fechaOC:fecha, estado:'recibida'})
-      });
-      closeModal('modal-oc');
-      await loadData();
-    } catch(e) { alert('Error: ' + e.message); }
+      await fetch(API+'/gestionar_oc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:currentKey,numeroOC:numero,fechaOC:fecha,estado:'recibida'})});
+      closeModal('modal-oc'); await loadData();
+    } catch(e){ alert('Error: '+e.message); }
   }
 
-  // Cerrar modales con click fuera o Escape
+  async function guardarCorreoCliente() {
+    var fecha = document.getElementById('input-fecha-correo-cliente').value;
+    var obs   = document.getElementById('input-obs-correo-cliente').value.trim();
+    if (!fecha){ alert('Ingresa la fecha de respuesta'); return; }
+    try {
+      await fetch(API+'/gestionar_oc',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({key:currentKey,fechaCorreoCliente:fecha,obsCorreoCliente:obs})});
+      closeModal('modal-correo-cliente'); await loadData();
+      showToast('✓ Respuesta del cliente registrada');
+    } catch(e){ alert('Error: '+e.message); }
+  }
+
   document.querySelectorAll('.modal-overlay').forEach(function(el){
-    el.addEventListener('click', function(e){ if (e.target === el) el.classList.remove('show'); });
+    el.addEventListener('click',function(e){ if(e.target===el) el.classList.remove('show'); });
   });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay').forEach(function(el){ el.classList.remove('show'); });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') document.querySelectorAll('.modal-overlay').forEach(function(el){ el.classList.remove('show'); });
   });
 
   loadData();
