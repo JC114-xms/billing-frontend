@@ -40,12 +40,10 @@
   .filter-btn.f-recibida.active { border-color: var(--success); color: var(--success); background: rgba(16,185,129,0.08); }
   .filter-btn.f-vencida.active { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.08); }
 
-  /* Botón reset */
   .btn-reset { display: flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 8px; border: 1px solid rgba(239,68,68,0.4); background: rgba(239,68,68,0.06); color: var(--danger); font-family: var(--mono); font-size: 12px; cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px; margin-left: auto; }
   .btn-reset:hover { background: rgba(239,68,68,0.14); border-color: var(--danger); }
   .btn-reset:disabled { opacity: 0.4; cursor: not-allowed; }
 
-  /* KPIs */
   .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
   .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; position: relative; overflow: hidden; transition: opacity 0.3s; }
   .kpi::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
@@ -58,7 +56,6 @@
   .kpi-sub { font-size: 11px; color: var(--muted); font-family: var(--mono); margin-top: 4px; }
   .kpi.fading { opacity: 0.3; }
 
-  /* Tabla */
   .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
   table { width: 100%; border-collapse: collapse; }
   thead tr { border-bottom: 1px solid var(--border2); }
@@ -80,10 +77,9 @@
   .dias-danger { color: var(--danger); font-family: var(--mono); font-size: 12px; font-weight: 600; }
   .btn-accion { padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border2); background: var(--surface2); color: var(--muted); font-family: var(--mono); font-size: 11px; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
   .btn-accion:hover { border-color: var(--accent); color: var(--accent); }
-  .btn-cobro:hover { border-color: var(--accent); color: var(--accent); }
   .btn-oc:hover { border-color: var(--success); color: var(--success); }
 
-  /* Modal estándar */
+  /* Modales */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; align-items: center; justify-content: center; }
   .modal-overlay.show { display: flex; }
   .modal { background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 32px; width: 100%; max-width: 480px; position: relative; }
@@ -94,39 +90,38 @@
   .form-input { width: 100%; background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: var(--mono); font-size: 13px; outline: none; transition: border-color 0.15s; }
   .form-input:focus { border-color: var(--accent); }
   .modal-actions { display: flex; gap: 12px; margin-top: 24px; }
-  .btn-primary { flex: 1; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+  .btn-primary { flex: 1; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; }
   .btn-primary:hover { background: var(--accent2); }
-  .btn-secondary { padding: 12px 20px; background: transparent; color: var(--muted); border: 1px solid var(--border2); border-radius: 8px; font-family: var(--sans); font-size: 14px; cursor: pointer; transition: all 0.15s; }
+  .btn-secondary { padding: 12px 20px; background: transparent; color: var(--muted); border: 1px solid var(--border2); border-radius: 8px; font-family: var(--sans); font-size: 14px; cursor: pointer; }
   .btn-secondary:hover { color: var(--text); border-color: var(--text); }
-  .btn-success { flex: 1; padding: 12px; background: var(--success); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; }
+  .btn-success { flex: 1; padding: 12px; background: var(--success); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 600; cursor: pointer; }
   .btn-success:hover { opacity: 0.88; }
-  .btn-danger-confirm { flex: 1; padding: 12px; background: var(--danger); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }
+  .btn-danger-confirm { flex: 1; padding: 12px; background: var(--danger); color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 14px; font-weight: 700; cursor: pointer; }
   .btn-danger-confirm:hover { opacity: 0.85; }
   .btn-danger-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
 
   /* Modal reset */
-  .modal-reset { border-color: rgba(239,68,68,0.5); }
-  .modal-reset::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--danger), var(--warn)); border-radius: 16px 16px 0 0; }
+  .modal-reset { border-color: rgba(239,68,68,0.5); overflow: hidden; }
+  .modal-reset::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--danger), var(--warn)); }
   .reset-icon { font-size: 36px; margin-bottom: 12px; display: block; }
   .reset-title { color: var(--danger); }
   .reset-periodo-box { background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.25); border-radius: 8px; padding: 10px 14px; font-family: var(--mono); font-size: 13px; color: var(--warn); margin: 12px 0; }
-  .reset-lista { font-size: 12px; font-family: var(--mono); color: var(--muted); line-height: 2; margin: 10px 0 6px; }
-  .reset-lista li { list-style: none; }
+  .reset-lista { font-size: 12px; font-family: var(--mono); color: var(--muted); line-height: 2.2; margin: 10px 0 6px; list-style: none; }
   .reset-lista li::before { content: '✗ '; color: var(--danger); }
   .reset-advertencia { font-size: 11px; font-family: var(--mono); color: var(--danger); margin-top: 8px; }
 
-  /* Pantalla progreso reset */
+  /* Progreso reset */
   .reset-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; flex-direction: column; gap: 18px; }
   .reset-overlay.show { display: flex; }
   .spinner { width: 44px; height: 44px; border: 3px solid var(--border2); border-top-color: var(--danger); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .reset-prog-title { font-size: 15px; font-family: var(--mono); color: var(--text); }
-  .reset-prog-step { font-size: 12px; font-family: var(--mono); color: var(--muted); }
+  .reset-prog-step { font-size: 12px; font-family: var(--mono); color: var(--muted); min-height: 20px; }
   .reset-prog-bar-wrap { width: 280px; height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; }
   .reset-prog-bar { height: 3px; background: var(--danger); border-radius: 2px; transition: width 0.4s; }
 
   /* Toast */
-  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--success); border-radius: 10px; padding: 14px 20px; font-size: 13px; font-family: var(--mono); color: var(--success); z-index: 300; transform: translateY(80px); opacity: 0; transition: all 0.3s; max-width: 380px; }
+  .toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--success); border-radius: 10px; padding: 14px 20px; font-size: 13px; font-family: var(--mono); color: var(--success); z-index: 300; transform: translateY(80px); opacity: 0; transition: all 0.3s; max-width: 400px; line-height: 1.5; }
   .toast.show { transform: translateY(0); opacity: 1; }
   .toast.error { border-color: var(--danger); color: var(--danger); }
 
@@ -136,20 +131,20 @@
 </head>
 <body>
 
-<!-- ── Modal reset ──────────────────────────────────────────────────────────── -->
+<!-- Modal reset -->
 <div class="modal-overlay" id="modal-reset">
   <div class="modal modal-reset">
     <span class="reset-icon">⚠️</span>
     <div class="modal-title reset-title">Resetear período</div>
-    <div class="modal-sub">Esta acción eliminará todos los datos del período y reiniciará el proceso desde cero.</div>
+    <div class="modal-sub">Esto eliminará permanentemente todos los datos del período del Blob Storage y reiniciará el proceso desde cero.</div>
     <div class="reset-periodo-box" id="reset-periodo-box">Período: —</div>
     <ul class="reset-lista">
       <li>Registros de gestión OC del período</li>
       <li>Correos de cobro registrados</li>
       <li>OCs marcadas como recibidas</li>
-      <li>Estado de todos los clientes del período</li>
+      <li>Snapshot del período en Blob Storage</li>
     </ul>
-    <div class="reset-advertencia">⚠ Esta acción no se puede deshacer.</div>
+    <div class="reset-advertencia">⚠ Esta acción borra los datos reales del Blob Storage. No se puede deshacer.</div>
     <div class="modal-actions">
       <button class="btn-secondary" onclick="closeModal('modal-reset')">Cancelar</button>
       <button class="btn-danger-confirm" id="btn-confirmar-reset" onclick="ejecutarReset()">🗑 Sí, resetear período</button>
@@ -157,20 +152,20 @@
   </div>
 </div>
 
-<!-- ── Pantalla progreso reset ──────────────────────────────────────────────── -->
+<!-- Pantalla progreso -->
 <div class="reset-overlay" id="reset-overlay">
   <div class="spinner"></div>
-  <div class="reset-prog-title">Reseteando período...</div>
+  <div class="reset-prog-title">Reseteando período en Blob Storage...</div>
   <div class="reset-prog-step" id="reset-step-txt">Iniciando...</div>
   <div class="reset-prog-bar-wrap">
     <div class="reset-prog-bar" id="reset-prog-bar" style="width:0%"></div>
   </div>
 </div>
 
-<!-- ── Toast ────────────────────────────────────────────────────────────────── -->
+<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- ── Modales estándar ─────────────────────────────────────────────────────── -->
+<!-- Modales estándar -->
 <div class="modal-overlay" id="modal-cobro">
   <div class="modal">
     <div class="modal-title">Registrar correo de cobro</div>
@@ -205,7 +200,6 @@
   </div>
 </div>
 
-<!-- ── App ──────────────────────────────────────────────────────────────────── -->
 <div class="topbar">
   <div class="logo">Alertas <span>Amigables</span></div>
   <nav class="nav-links">
@@ -229,7 +223,6 @@
     <button class="filter-btn f-pendiente" onclick="setFilter('pendiente', this)">Pendientes</button>
     <button class="filter-btn f-recibida" onclick="setFilter('recibida', this)">Recibidas</button>
     <button class="filter-btn f-vencida" onclick="setFilter('vencida', this)">Vencidas</button>
-    <!-- Botón reset -->
     <button class="btn-reset" id="btn-reset" onclick="abrirModalReset()">
       🔄 Resetear período
     </button>
@@ -275,9 +268,9 @@
 
 <script>
   var API = 'https://billing-fn-node.azurewebsites.net/api';
-  var allData = [];
+  var allData      = [];
   var currentFilter = 'todos';
-  var currentKey = null;
+  var currentKey   = null;
   var periodoAReset = null;
 
   // ── Helpers ───────────────────────────────────────────────────────────────
@@ -293,36 +286,41 @@
   function fmtUSD(n) {
     return 'USD ' + (n||0).toLocaleString('es-CL', {minimumFractionDigits:0, maximumFractionDigits:0});
   }
+  function labelPeriodo(p) {
+    var map = {'2026-05':'Mayo 2026','2026-06':'Junio 2026','2026-04':'Abril 2026','2026-03':'Marzo 2026','2026-02':'Febrero 2026','2026-01':'Enero 2026'};
+    return map[p] || p;
+  }
 
   // ── Toast ─────────────────────────────────────────────────────────────────
   function showToast(msg, esError) {
     var t = document.getElementById('toast');
-    t.textContent = msg;
+    t.innerHTML = msg;
     t.className = 'toast' + (esError ? ' error' : '') + ' show';
-    setTimeout(function() { t.className = 'toast' + (esError ? ' error' : ''); }, 4500);
+    setTimeout(function(){ t.className = 'toast' + (esError ? ' error' : ''); }, 5000);
   }
 
   // ── Cargar datos ──────────────────────────────────────────────────────────
   async function loadData() {
     var periodo = document.getElementById('select-periodo').value;
     try {
-      var res = await fetch(API + '/gestionar_oc' + (periodo ? '?periodo=' + periodo : ''));
+      var url = API + '/gestionar_oc' + (periodo ? '?periodo=' + periodo : '');
+      var res = await fetch(url);
       allData = await res.json();
       populatePeriodos();
       renderTable();
     } catch(e) {
       document.getElementById('tabla-body').innerHTML =
-        '<tr><td colspan="8" class="empty">Error cargando datos: ' + e.message + '</td></tr>';
+        '<tr><td colspan="8" class="empty">Error: ' + e.message + '</td></tr>';
     }
   }
 
   function populatePeriodos() {
-    var sel = document.getElementById('select-periodo');
+    var sel     = document.getElementById('select-periodo');
     var current = sel.value;
     var periodos = [...new Set(allData.map(function(r){ return r.periodo; }))].sort().reverse();
     sel.innerHTML = '<option value="">Todos los períodos</option>' +
-      periodos.map(function(p) {
-        return '<option value="' + p + '"' + (p === current ? ' selected' : '') + '>' + p + '</option>';
+      periodos.map(function(p){
+        return '<option value="'+p+'"'+(p===current?' selected':'')+'>'+labelPeriodo(p)+'</option>';
       }).join('');
   }
 
@@ -335,7 +333,7 @@
 
   // ── Render tabla ──────────────────────────────────────────────────────────
   function renderTable() {
-    var filtered = allData.filter(function(r) {
+    var filtered = allData.filter(function(r){
       if (currentFilter === 'todos') return true;
       return getEstadoEfectivo(r) === currentFilter;
     });
@@ -354,11 +352,12 @@
     document.getElementById('kpi-monto-vencida').textContent   = fmtUSD(vencidas.reduce(function(s,r){ return s+(r.total||0); },0));
 
     if (filtered.length === 0) {
-      document.getElementById('tabla-body').innerHTML = '<tr><td colspan="8" class="empty">No hay registros</td></tr>';
+      document.getElementById('tabla-body').innerHTML =
+        '<tr><td colspan="8" class="empty">No hay registros</td></tr>';
       return;
     }
 
-    document.getElementById('tabla-body').innerHTML = filtered.map(function(r) {
+    document.getElementById('tabla-body').innerHTML = filtered.map(function(r){
       var estado = getEstadoEfectivo(r);
       var dias   = getDiasRestantes(r.periodo);
       var diasHtml = estado === 'recibida' ? '<span class="dias-ok">—</span>'
@@ -366,29 +365,27 @@
         : dias <= 9  ? '<span class="dias-danger">' + dias + ' días</span>'
         : dias <= 15 ? '<span class="dias-warn">' + dias + ' días</span>'
         :               '<span class="dias-ok">' + dias + ' días</span>';
-
-      var bc = estado === 'recibida' ? 'badge-recibida' : estado === 'vencida' ? 'badge-vencida' : 'badge-pendiente';
-      var bt = estado === 'recibida' ? 'Recibida' : estado === 'vencida' ? 'Vencida' : 'Pendiente';
+      var bc = estado==='recibida' ? 'badge-recibida' : estado==='vencida' ? 'badge-vencida' : 'badge-pendiente';
+      var bt = estado==='recibida' ? 'Recibida' : estado==='vencida' ? 'Vencida' : 'Pendiente';
       var cobroHtml = r.fechaCobro
-        ? '<span class="badge badge-cobro">' + r.fechaCobro + '</span>'
+        ? '<span class="badge badge-cobro">'+r.fechaCobro+'</span>'
         : '<span class="td-mono">Sin registrar</span>';
       var ocHtml = r.numeroOC
-        ? '<span class="td-mono" style="color:var(--success)">' + r.numeroOC + '</span>'
+        ? '<span class="td-mono" style="color:var(--success)">'+r.numeroOC+'</span>'
         : '<span class="td-mono">—</span>';
       var acciones = estado !== 'recibida'
-        ? '<button class="btn-accion btn-cobro" onclick="abrirModalCobro(\'' + r.key + '\',\'' + r.cliente.replace(/'/g,"\\'") + '\')">' + (r.fechaCobro ? 'Editar cobro' : 'Registrar cobro') + '</button>' +
-          '<button class="btn-accion btn-oc" onclick="abrirModalOC(\'' + r.key + '\',\'' + r.cliente.replace(/'/g,"\\'") + '\')">Marcar OC</button>'
+        ? '<button class="btn-accion btn-cobro" onclick="abrirModalCobro(\''+r.key+'\',\''+r.cliente.replace(/'/g,"\\'")+'\')">'+(r.fechaCobro?'Editar cobro':'Registrar cobro')+'</button>'+
+          '<button class="btn-accion btn-oc" onclick="abrirModalOC(\''+r.key+'\',\''+r.cliente.replace(/'/g,"\\'")+'\')">Marcar OC</button>'
         : '';
-
-      return '<tr>' +
-        '<td class="td-cliente">' + r.cliente + '</td>' +
-        '<td class="td-mono">' + r.periodo + '</td>' +
-        '<td class="td-amount">$' + (r.total||0).toLocaleString('es-CL',{minimumFractionDigits:2,maximumFractionDigits:2}) + '</td>' +
-        '<td><span class="badge ' + bc + '">' + bt + '</span></td>' +
-        '<td>' + cobroHtml + '</td>' +
-        '<td>' + diasHtml + '</td>' +
-        '<td>' + ocHtml + '</td>' +
-        '<td style="display:flex;gap:6px">' + acciones + '</td>' +
+      return '<tr>'+
+        '<td class="td-cliente">'+r.cliente+'</td>'+
+        '<td class="td-mono">'+r.periodo+'</td>'+
+        '<td class="td-amount">$'+(r.total||0).toLocaleString('es-CL',{minimumFractionDigits:2,maximumFractionDigits:2})+'</td>'+
+        '<td><span class="badge '+bc+'">'+bt+'</span></td>'+
+        '<td>'+cobroHtml+'</td>'+
+        '<td>'+diasHtml+'</td>'+
+        '<td>'+ocHtml+'</td>'+
+        '<td style="display:flex;gap:6px">'+acciones+'</td>'+
       '</tr>';
     }).join('');
   }
@@ -399,21 +396,21 @@
     periodoAReset = sel.value;
 
     if (!periodoAReset) {
-      // Si no hay período seleccionado, tomar el más reciente
+      // Tomar el período más reciente si no hay selección
       var periodos = [...new Set(allData.map(function(r){ return r.periodo; }))].sort().reverse();
       if (periodos.length === 0) { showToast('No hay datos para resetear', true); return; }
       periodoAReset = periodos[0];
     }
 
-    var labels = { '2026-05':'Mayo 2026','2026-06':'Junio 2026','2026-04':'Abril 2026','2026-03':'Marzo 2026' };
-    var label  = labels[periodoAReset] || periodoAReset;
-    document.getElementById('reset-periodo-box').textContent = '⚡ Período: ' + label + ' (' + periodoAReset + ')';
+    document.getElementById('reset-periodo-box').textContent =
+      '⚡ ' + labelPeriodo(periodoAReset) + ' (' + periodoAReset + ')';
     document.getElementById('modal-reset').classList.add('show');
   }
 
-  // ── Ejecutar reset ────────────────────────────────────────────────────────
+  // ── Ejecutar reset real contra Blob Storage ───────────────────────────────
   async function ejecutarReset() {
-    document.getElementById('btn-confirmar-reset').disabled = true;
+    var btnConf = document.getElementById('btn-confirmar-reset');
+    btnConf.disabled = true;
     closeModal('modal-reset');
 
     var overlay = document.getElementById('reset-overlay');
@@ -421,13 +418,13 @@
     var bar     = document.getElementById('reset-prog-bar');
     overlay.classList.add('show');
 
+    // Pasos visuales con progreso
     var pasos = [
-      { txt: 'Conectando con Azure Blob Storage...', pct: 15, ms: 700 },
-      { txt: 'Eliminando registros del período ' + periodoAReset + '...', pct: 35, ms: 1000 },
-      { txt: 'Reseteando correos de cobro...', pct: 55, ms: 800 },
-      { txt: 'Limpiando OCs registradas...', pct: 72, ms: 700 },
-      { txt: 'Actualizando estado de clientes...', pct: 88, ms: 600 },
-      { txt: 'Proceso completado ✓', pct: 100, ms: 500 },
+      { txt: 'Conectando con Azure Blob Storage...', pct: 10, ms: 500 },
+      { txt: 'Leyendo historial.json...', pct: 25, ms: 600 },
+      { txt: 'Eliminando registros del período ' + periodoAReset + '...', pct: 50, ms: 800 },
+      { txt: 'Borrando periodo_' + periodoAReset + '.json del Blob Storage...', pct: 75, ms: 700 },
+      { txt: 'Guardando historial actualizado...', pct: 90, ms: 600 },
     ];
 
     for (var i = 0; i < pasos.length; i++) {
@@ -436,36 +433,71 @@
       await new Promise(function(r){ setTimeout(r, pasos[i].ms); });
     }
 
-    // Llamar al API real si existe
+    // ── Llamada real al API con método DELETE ─────────────────────────────
+    var resetOk      = false;
+    var resetMsg     = '';
+    var eliminados   = 0;
+
     try {
-      await fetch(API + '/reset_periodo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ periodo: periodoAReset })
+      var res = await fetch(API + '/gestionar_oc?periodo=' + periodoAReset, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
       });
+
+      if (res.ok) {
+        var data   = await res.json();
+        resetOk    = data.ok === true;
+        eliminados = data.registrosEliminados || 0;
+        resetMsg   = data.mensaje || '';
+      } else {
+        var errText = await res.text();
+        throw new Error('HTTP ' + res.status + ': ' + errText);
+      }
     } catch(e) {
-      // Sin endpoint real: el reset es visual para la demo
+      console.error('Error en reset:', e.message);
+      resetOk  = false;
+      resetMsg = e.message;
     }
 
+    // Completar barra
+    stepTxt.textContent = resetOk ? 'Completado ✓' : 'Error: ' + resetMsg;
+    bar.style.width     = '100%';
+    bar.style.background = resetOk ? 'var(--success)' : 'var(--danger)';
+    await new Promise(function(r){ setTimeout(r, 600); });
+
     overlay.classList.remove('show');
-    document.getElementById('btn-confirmar-reset').disabled = false;
+    bar.style.background = 'var(--danger)';
+    btnConf.disabled = false;
 
-    // Limpiar tabla y KPIs visualmente
-    allData = allData.filter(function(r){ return r.periodo !== periodoAReset; });
-    renderTable();
+    if (resetOk) {
+      // Limpiar datos locales del período
+      allData = allData.filter(function(r){ return r.periodo !== periodoAReset; });
+      renderTable();
 
-    // Fade en KPIs
-    document.querySelectorAll('.kpi').forEach(function(k){ k.classList.add('fading'); });
-    setTimeout(function(){
-      document.querySelectorAll('.kpi').forEach(function(k){ k.classList.remove('fading'); });
-    }, 600);
+      // Fade en KPIs
+      document.querySelectorAll('.kpi').forEach(function(k){ k.classList.add('fading'); });
+      setTimeout(function(){
+        document.querySelectorAll('.kpi').forEach(function(k){ k.classList.remove('fading'); });
+      }, 700);
 
-    var labels = { '2026-05':'Mayo 2026','2026-06':'Junio 2026','2026-04':'Abril 2026','2026-03':'Marzo 2026' };
-    showToast('✓ Período ' + (labels[periodoAReset]||periodoAReset) + ' reseteado. Carga el Excel para reiniciar el proceso.');
+      showToast(
+        '✓ ' + labelPeriodo(periodoAReset) + ' reseteado correctamente.<br>' +
+        eliminados + ' registros eliminados del Blob Storage.<br>' +
+        'Ahora puedes cargar el Excel para reiniciar el proceso.'
+      );
+
+      // Limpiar selector y recargar
+      document.getElementById('select-periodo').value = '';
+      setTimeout(function(){ loadData(); }, 1500);
+
+    } else {
+      showToast('❌ Error al resetear: ' + resetMsg + '<br>Verifica los permisos del SAS Token.', true);
+    }
+
     periodoAReset = null;
   }
 
-  // ── Modales cobro y OC ────────────────────────────────────────────────────
+  // ── Modales estándar ──────────────────────────────────────────────────────
   function abrirModalCobro(key, cliente) {
     currentKey = key;
     document.getElementById('modal-cobro-sub').textContent = cliente;
@@ -486,26 +518,36 @@
     var fecha = document.getElementById('input-fecha-cobro').value;
     if (!fecha) return;
     try {
-      await fetch(API + '/gestionar_oc', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({key:currentKey, fechaCobro:fecha, estado:'pendiente'}) });
+      await fetch(API + '/gestionar_oc', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({key:currentKey, fechaCobro:fecha, estado:'pendiente'})
+      });
       closeModal('modal-cobro');
       await loadData();
     } catch(e) { alert('Error: ' + e.message); }
   }
+
   async function guardarOC() {
     var numero = document.getElementById('input-numero-oc').value.trim();
     var fecha  = document.getElementById('input-fecha-oc').value;
     if (!numero || !fecha) { alert('Completa todos los campos'); return; }
     try {
-      await fetch(API + '/gestionar_oc', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({key:currentKey, numeroOC:numero, fechaOC:fecha, estado:'recibida'}) });
+      await fetch(API + '/gestionar_oc', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({key:currentKey, numeroOC:numero, fechaOC:fecha, estado:'recibida'})
+      });
       closeModal('modal-oc');
       await loadData();
     } catch(e) { alert('Error: ' + e.message); }
   }
 
-  document.querySelectorAll('.modal-overlay').forEach(function(el) {
+  // Cerrar modales con click fuera o Escape
+  document.querySelectorAll('.modal-overlay').forEach(function(el){
     el.addEventListener('click', function(e){ if (e.target === el) el.classList.remove('show'); });
   });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') document.querySelectorAll('.modal-overlay').forEach(function(el){ el.classList.remove('show'); }); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') document.querySelectorAll('.modal-overlay').forEach(function(el){ el.classList.remove('show'); });
+  });
 
   loadData();
 </script>
