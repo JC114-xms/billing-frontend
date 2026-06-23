@@ -8,84 +8,26 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0c10;
-    --surface: #111318;
-    --surface2: #181c23;
-    --border: #232830;
-    --border2: #2e3440;
-    --accent: #3b82f6;
-    --accent2: #1d4ed8;
-    --success: #10b981;
-    --warn: #f59e0b;
-    --text: #e8eaf0;
-    --muted: #6b7280;
-    --mono: 'DM Mono', monospace;
-    --sans: 'Syne', sans-serif;
+    --bg: #0a0c10; --surface: #111318; --surface2: #181c23;
+    --border: #232830; --border2: #2e3440;
+    --accent: #3b82f6; --accent2: #1d4ed8;
+    --success: #10b981; --warn: #f59e0b;
+    --text: #e8eaf0; --muted: #6b7280;
+    --mono: 'DM Mono', monospace; --sans: 'Syne', sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(var(--border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--border) 1px, transparent 1px);
-    background-size: 40px 40px;
-    opacity: 0.35;
-    pointer-events: none;
-  }
-  header {
-    width: 100%; max-width: 860px;
-    padding: 48px 24px 0;
-  }
-  .logo-row { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-  .logo-icon {
-    width: 36px; height: 36px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .logo-text { font-size: 18px; font-weight: 600; letter-spacing: -0.3px; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 40px 40px; opacity: 0.35; pointer-events: none; }
+  header { width: 100%; max-width: 860px; padding: 48px 24px 0; }
   .tagline { font-size: 12px; color: var(--muted); font-family: var(--mono); margin-bottom: 40px; }
   h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 800; line-height: 1.05; letter-spacing: -1.5px; margin-bottom: 12px; }
   h1 span { color: var(--accent); }
   .subtitle { color: var(--muted); font-size: 15px; line-height: 1.6; margin-bottom: 48px; max-width: 520px; }
   main { width: 100%; max-width: 860px; padding: 0 24px 80px; display: flex; flex-direction: column; gap: 20px; }
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    position: relative;
-    overflow: hidden;
-  }
-  .card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.6;
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); opacity: 0.6; }
   .card-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
-  #drop-zone {
-    border: 1.5px dashed var(--border2);
-    border-radius: 12px;
-    padding: 48px 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    background: var(--surface2);
-    position: relative;
-  }
+  #drop-zone { border: 1.5px dashed var(--border2); border-radius: 12px; padding: 48px 24px; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--surface2); position: relative; }
   #drop-zone:hover, #drop-zone.drag-over { border-color: var(--accent); background: rgba(59,130,246,0.06); }
   #drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
   .drop-icon { font-size: 40px; margin-bottom: 16px; display: block; }
@@ -98,11 +40,18 @@
   .file-size { font-size: 11px; color: var(--muted); font-family: var(--mono); }
   .file-remove { margin-left: auto; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 18px; padding: 4px 8px; border-radius: 6px; transition: color 0.15s; }
   .file-remove:hover { color: var(--text); }
+
+  /* Selector de período */
+  .periodo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+  .periodo-field label { display: block; font-size: 11px; font-family: var(--mono); color: var(--muted); margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
+  .periodo-select { width: 100%; background: var(--surface2); border: 1px solid var(--accent); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: var(--mono); font-size: 13px; outline: none; cursor: pointer; }
+  .periodo-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; font-family: var(--mono); color: var(--accent); background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); border-radius: 6px; padding: 4px 10px; }
+
   .cols-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 20px; }
   .col-field label { display: block; font-size: 11px; font-family: var(--mono); color: var(--muted); margin-bottom: 6px; letter-spacing: 1px; text-transform: uppercase; }
   .col-field input { width: 100%; background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 12px; color: var(--text); font-family: var(--mono); font-size: 13px; outline: none; transition: border-color 0.15s; }
   .col-field input:focus { border-color: var(--accent); }
-  #submit-btn { width: 100%; margin-top: 24px; padding: 16px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-family: var(--sans); font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  #submit-btn { width: 100%; margin-top: 24px; padding: 16px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-family: var(--sans); font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   #submit-btn:hover:not(:disabled) { background: var(--accent2); }
   #submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
   #progress-area { display: none; }
@@ -129,17 +78,13 @@
   .history-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
   .history-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; border-radius: 8px; background: var(--surface2); border: 1px solid var(--border); }
   .hist-badge { font-size: 10px; font-family: var(--mono); padding: 3px 8px; border-radius: 4px; background: rgba(59,130,246,0.12); color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+  .hist-periodo { font-size: 10px; font-family: var(--mono); padding: 3px 8px; border-radius: 4px; background: rgba(16,185,129,0.1); color: var(--success); border: 1px solid rgba(16,185,129,0.2); }
   .hist-name { font-size: 13px; font-family: var(--mono); flex: 1; }
   .hist-time { font-size: 11px; color: var(--muted); font-family: var(--mono); }
   #error-area { display: none; padding: 16px 20px; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 10px; font-family: var(--mono); font-size: 13px; color: #ef4444; margin-top: 12px; }
   #error-area.show { display: block; }
   footer { width: 100%; max-width: 860px; padding: 0 24px 32px; text-align: center; font-size: 11px; color: var(--muted); font-family: var(--mono); }
-
-  .topbar {
-    display: flex; align-items: center; gap: 16px;
-    padding: 20px 32px; border-bottom: 1px solid var(--border);
-    background: var(--surface); position: relative; z-index: 1;
-  }
+  .topbar { display: flex; align-items: center; gap: 16px; padding: 20px 32px; border-bottom: 1px solid var(--border); background: var(--surface); position: relative; z-index: 1; }
   .logo { font-size: 20px; font-weight: 800; letter-spacing: -.5px; }
   .logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 8px; margin-left: auto; }
@@ -151,7 +96,7 @@
 <body>
 <div class="topbar">
   <div class="logo">Alertas <span>Amigables</span></div>
-    <nav class="nav-links">
+  <nav class="nav-links">
     <a href="index.html" class="nav-link active">Cargar Excel</a>
     <a href="gestion_oc.html" class="nav-link">Gestión OC</a>
     <a href="correos.html" class="nav-link">Correos OC</a>
@@ -182,7 +127,33 @@
       <button class="file-remove" onclick="clearFile()">✕</button>
     </div>
     <div id="error-area"></div>
-    <div class="card-label" style="margin-top:28px">02 — Columnas clave</div>
+
+    <!-- SELECTOR DE PERÍODO — NUEVO -->
+    <div class="card-label" style="margin-top:28px">02 — Período de facturación</div>
+    <div class="periodo-row">
+      <div class="periodo-field">
+        <label>Mes y año del Excel</label>
+        <select class="periodo-select" id="select-periodo">
+          <option value="2026-05">Mayo 2026</option>
+          <option value="2026-06">Junio 2026</option>
+          <option value="2026-04">Abril 2026</option>
+          <option value="2026-03">Marzo 2026</option>
+          <option value="2026-02">Febrero 2026</option>
+          <option value="2026-01">Enero 2026</option>
+          <option value="2025-12">Diciembre 2025</option>
+          <option value="2025-11">Noviembre 2025</option>
+        </select>
+      </div>
+      <div class="periodo-field">
+        <label>Período seleccionado</label>
+        <div class="periodo-badge" id="periodo-badge">📅 2026-05 · Mayo 2026</div>
+        <div style="font-size:10px;color:var(--muted);font-family:var(--mono);margin-top:6px;">
+          Los datos se guardarán bajo este período en Gestión OC
+        </div>
+      </div>
+    </div>
+
+    <div class="card-label" style="margin-top:28px">03 — Columnas clave</div>
     <div class="cols-row">
       <div class="col-field">
         <label>Cliente</label>
@@ -201,14 +172,16 @@
       <span>⚡</span> Generar reporte de costos
     </button>
   </div>
+
   <div class="card" id="progress-area">
     <div class="card-label">Procesando</div>
     <div class="progress-steps">
       <div class="step" id="step-upload"><div class="step-dot"></div><span class="step-text">Subiendo archivo a Azure...</span></div>
-      <div class="step" id="step-process"><div class="step-dot"></div><span class="step-text">Ejecutando pivot por cliente y categoría...</span></div>
+      <div class="step" id="step-process"><div class="step-dot"></div><span class="step-text" id="step-process-text">Ejecutando pivot por cliente y categoría...</span></div>
       <div class="step" id="step-export"><div class="step-dot"></div><span class="step-text">Generando Excel de resultados...</span></div>
     </div>
   </div>
+
   <div class="card" id="result-area">
     <div class="card-label">Resultado listo</div>
     <div class="result-inner">
@@ -220,21 +193,43 @@
       <a id="download-btn" href="#" download>⬇ Descargar Excel</a>
     </div>
   </div>
+
   <div class="card" id="history-card" style="display:none">
     <div class="card-label">Historial reciente</div>
     <div class="history-list" id="history-list"></div>
   </div>
 </main>
 <footer>Alertas Amigables · Azure Static Web Apps + Functions + OpenAI GPT-4o · 2026</footer>
+
 <script>
-  const FUNCTION_URL = 'https://billing-fn-node.azurewebsites.net';
-  let selectedFile = null;
-  const fileInput = document.getElementById('file-input');
-  const dropZone = document.getElementById('drop-zone');
-  fileInput.addEventListener('change', e => { if (e.target.files[0]) setFile(e.target.files[0]); });
-  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
-  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-  dropZone.addEventListener('drop', e => { e.preventDefault(); dropZone.classList.remove('drag-over'); if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]); });
+  var FUNCTION_URL = 'https://billing-fn-node.azurewebsites.net';
+  var selectedFile = null;
+
+  var PERIODO_LABELS = {
+    '2026-05': 'Mayo 2026', '2026-06': 'Junio 2026',
+    '2026-04': 'Abril 2026', '2026-03': 'Marzo 2026',
+    '2026-02': 'Febrero 2026', '2026-01': 'Enero 2026',
+    '2025-12': 'Diciembre 2025', '2025-11': 'Noviembre 2025'
+  };
+
+  // Actualizar badge de período cuando cambia el selector
+  document.getElementById('select-periodo').addEventListener('change', function() {
+    var val = this.value;
+    document.getElementById('periodo-badge').textContent = '📅 ' + val + ' · ' + (PERIODO_LABELS[val] || val);
+    document.getElementById('step-process-text').textContent =
+      'Guardando datos del período ' + (PERIODO_LABELS[val] || val) + ' en Gestión OC...';
+  });
+
+  var fileInput  = document.getElementById('file-input');
+  var dropZone   = document.getElementById('drop-zone');
+  fileInput.addEventListener('change', function(e) { if (e.target.files[0]) setFile(e.target.files[0]); });
+  dropZone.addEventListener('dragover',  function(e) { e.preventDefault(); dropZone.classList.add('drag-over'); });
+  dropZone.addEventListener('dragleave', function()  { dropZone.classList.remove('drag-over'); });
+  dropZone.addEventListener('drop', function(e) {
+    e.preventDefault(); dropZone.classList.remove('drag-over');
+    if (e.dataTransfer.files[0]) setFile(e.dataTransfer.files[0]);
+  });
+
   function setFile(f) {
     if (!f.name.match(/\.xlsx?$/i)) { showError('Solo se aceptan archivos .xlsx o .xls'); return; }
     selectedFile = f;
@@ -244,63 +239,102 @@
     document.getElementById('submit-btn').disabled = false;
     hideError();
   }
+
   function clearFile() {
     selectedFile = null;
     fileInput.value = '';
     document.getElementById('file-info').classList.remove('show');
     document.getElementById('submit-btn').disabled = true;
   }
-  function showError(msg) { const el = document.getElementById('error-area'); el.textContent = '⚠ ' + msg; el.classList.add('show'); }
+
+  function showError(msg) {
+    var el = document.getElementById('error-area');
+    el.textContent = '⚠ ' + msg;
+    el.classList.add('show');
+  }
   function hideError() { document.getElementById('error-area').classList.remove('show'); }
+
   function setStep(id, state) {
-    ['step-upload','step-process','step-export'].forEach(s => { document.getElementById(s).className = 'step'; });
+    ['step-upload','step-process','step-export'].forEach(function(s) {
+      document.getElementById(s).className = 'step';
+    });
     if (id) document.getElementById(id).classList.add(state);
   }
+
   async function processFile() {
     if (!selectedFile) return;
     hideError();
-    const colCustomer = document.getElementById('col-customer').value.trim();
-    const colTotal = document.getElementById('col-total').value.trim();
-    const colCategory = document.getElementById('col-category').value.trim();
+
+    var periodo     = document.getElementById('select-periodo').value;
+    var periodoLabel = PERIODO_LABELS[periodo] || periodo;
+    var colCustomer = document.getElementById('col-customer').value.trim();
+    var colTotal    = document.getElementById('col-total').value.trim();
+    var colCategory = document.getElementById('col-category').value.trim();
+
     document.getElementById('submit-btn').disabled = true;
     document.getElementById('progress-area').classList.add('show');
     document.getElementById('result-area').classList.remove('show');
+
     try {
       setStep('step-upload', 'active');
-      await new Promise(r => setTimeout(r, 600));
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-      formData.append('col_customer', colCustomer);
-      formData.append('col_total', colTotal);
-      formData.append('col_category', colCategory);
+      await new Promise(function(r) { setTimeout(r, 600); });
+
+      var formData = new FormData();
+      formData.append('file',          selectedFile);
+      formData.append('col_customer',  colCustomer);
+      formData.append('col_total',     colTotal);
+      formData.append('col_category',  colCategory);
+      formData.append('periodo',       periodo);   // ← ENVIAMOS EL PERÍODO CORRECTO
+
       setStep('step-upload', 'done');
       setStep('step-process', 'active');
-      const response = await fetch(FUNCTION_URL + '/api/process_excel', { method: 'POST', body: formData });
-      if (!response.ok) { const err = await response.text(); throw new Error(err || 'Error en el servidor'); }
+      document.getElementById('step-process-text').textContent =
+        'Guardando datos de ' + periodoLabel + ' en Gestión OC...';
+
+      var response = await fetch(FUNCTION_URL + '/api/process_excel', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!response.ok) {
+        var err = await response.text();
+        throw new Error(err || 'Error en el servidor');
+      }
+
       setStep('step-process', 'done');
       setStep('step-export', 'active');
-      await new Promise(r => setTimeout(r, 400));
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
+      await new Promise(function(r) { setTimeout(r, 400); });
+
+      var blob = await response.blob();
+      var url  = URL.createObjectURL(blob);
       setStep('step-export', 'done');
-      const meta = response.headers.get('X-Report-Meta') || '';
-      document.getElementById('result-meta').textContent = meta || selectedFile.name + ' procesado correctamente';
-      const dlBtn = document.getElementById('download-btn');
+
+      var meta = response.headers.get('X-Report-Meta') || '';
+      document.getElementById('result-meta').textContent =
+        meta || selectedFile.name + ' · ' + periodoLabel + ' · procesado correctamente';
+
+      var dlBtn  = document.getElementById('download-btn');
       dlBtn.href = url;
-      dlBtn.download = 'Costos_Clientes_' + new Date().toISOString().slice(0,10) + '.xlsx';
+      dlBtn.download = 'Costos_' + periodoLabel.replace(' ','_') + '_' + new Date().toISOString().slice(0,10) + '.xlsx';
       document.getElementById('result-area').classList.add('show');
-      addHistory(selectedFile.name);
-    } catch (err) {
+      addHistory(selectedFile.name, periodoLabel);
+
+    } catch(err) {
       showError(err.message);
       document.getElementById('submit-btn').disabled = false;
     }
   }
-  function addHistory(name) {
-    const list = document.getElementById('history-list');
-    const card = document.getElementById('history-card');
-    const item = document.createElement('div');
+
+  function addHistory(name, periodo) {
+    var list = document.getElementById('history-list');
+    var card = document.getElementById('history-card');
+    var item = document.createElement('div');
     item.className = 'history-item';
-    item.innerHTML = '<span class="hist-badge">xlsx</span><span class="hist-name">' + name + '</span><span class="hist-time">' + new Date().toLocaleTimeString('es-CL') + '</span>';
+    item.innerHTML =
+      '<span class="hist-badge">xlsx</span>' +
+      '<span class="hist-periodo">' + periodo + '</span>' +
+      '<span class="hist-name">' + name + '</span>' +
+      '<span class="hist-time">' + new Date().toLocaleTimeString('es-CL') + '</span>';
     list.prepend(item);
     card.style.display = 'block';
   }
